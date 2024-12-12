@@ -1,60 +1,60 @@
 CREATE TABLE comments (
-    id bigint NOT NULL,
-    post_id bigint,
-    user_id bigint,
+    id integer NOT NULL,
+    post_id integer,
+    user_id integer,
     content text NOT NULL,
     creation_date timestamp with time zone DEFAULT now()
 );
 CREATE TABLE courses (
-    id bigint NOT NULL,
+    id integer NOT NULL,
     title text NOT NULL,
     content json NOT NULL,
     creation_date timestamp with time zone DEFAULT now()
 );
 CREATE TABLE lessons (
-    id bigint NOT NULL,
-    module_id bigint,
+    id integer NOT NULL,
+    module_id integer,
     title text NOT NULL,
     content text,
     exercise text,
     lesson_order integer NOT NULL
 );
 CREATE TABLE likes (
-    id bigint NOT NULL,
-    user_id bigint,
-    post_id bigint,
-    news_id bigint
+    id integer NOT NULL,
+    user_id integer,
+    post_id integer,
+    news_id integer
 );
 CREATE TABLE modules (
-    id bigint NOT NULL,
-    course_id bigint,
+    id integer NOT NULL,
+    course_id integer,
     title text NOT NULL,
     description text,
     module_order integer NOT NULL
 );
 CREATE TABLE news (
-    id bigint NOT NULL,
+    id integer NOT NULL,
     title text NOT NULL,
     content text NOT NULL,
     publication_date timestamp with time zone DEFAULT now(),
     category text,
     image text,
-    author_id bigint
+    author_id integer
 );
 CREATE TABLE posts (
-    id bigint NOT NULL,
-    user_id bigint,
+    id integer NOT NULL,
+    user_id integer,
     title text NOT NULL,
     content text NOT NULL,
     creation_date timestamp with time zone DEFAULT now()
 );
 CREATE TABLE project_collaborators (
-    id bigint NOT NULL,
-    project_id bigint,
-    user_id bigint
+    id integer NOT NULL,
+    project_id integer,
+    user_id integer
 );
 CREATE TABLE projects (
-    id bigint NOT NULL,
+    id integer NOT NULL,
     name text NOT NULL,
     description text NOT NULL,
     start_date timestamp with time zone DEFAULT now(),
@@ -66,22 +66,22 @@ CREATE TABLE projects (
     subtitle text
 );
 CREATE TABLE user_progress (
-    id bigint NOT NULL,
-    user_id bigint,
-    course_id bigint,
-    module_id bigint,
-    lesson_id bigint,
+    id integer NOT NULL,
+    user_id integer,
+    course_id integer,
+    module_id integer,
+    lesson_id integer,
     completed boolean DEFAULT false,
     completed_at timestamp with time zone
 );
 CREATE TABLE user_projects (
-    id bigint NOT NULL,
-    user_id bigint,
-    project_id bigint,
+    id integer NOT NULL,
+    user_id integer,
+    project_id integer,
     contribution text
 );
 CREATE TABLE users (
-    id bigint NOT NULL,
+    id integer NOT NULL,
     name text NOT NULL,
     email text NOT NULL,
     registration_date timestamp with time zone DEFAULT now(),
