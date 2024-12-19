@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
-export class UsersService {
+export class UserService {
     show() {
         /* Conectar base de datos */
         return 'Hola, devuelvo todos los usuarios mira: ${data} <-- aun no hay data'
