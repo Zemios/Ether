@@ -1,3 +1,6 @@
+import { Module } from "src/module/module.entity";
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+
 @Entity()
 export class Lesson {
     @PrimaryGeneratedColumn()
