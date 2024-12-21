@@ -17,10 +17,9 @@ import { UserProjectModule } from './user-project/user-project.module';
 @Module({
   controllers: [ApiController],
   imports: [
-    // Define las rutas solo para los módulos dentro de `api`
     RouterModule.register([
       {
-        path: 'api', // Prefijo 'api' solo para los módulos dentro de esta carpeta
+        path: 'api',
         module: ApiModule,
         children: [
           {
@@ -85,7 +84,7 @@ import { UserProjectModule } from './user-project/user-project.module';
     ProjectModule,
     ProjectCollaboratorModule,
     UserProgressModule,
-    UserProjectModule, // Importa los módulos de `user` y demás submódulos aquí
+    UserProjectModule,
   ],
 })
 export class ApiModule { }

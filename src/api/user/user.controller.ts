@@ -5,26 +5,26 @@ import { Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 export class UserController {
     constructor(private UserService: UserService) { }
     @Get()
-    show() {
-        return this.UserService.show()
+    findAll() {
+        return this.UserService.findAll()
     }
     @Get('/:id')
-    get(@Param('id') id: string) {
-        return this.UserService.get(parseInt(id))
+    findOne(@Param('id') id: string) {
+        return this.UserService.findOne(parseInt(id))
     }
 
-    @Post()
-    post() {
-        return this.UserService.post()
-    }
+    // @Post()
+    // post() {
+    //     return this.UserService.post()
+    // }
 
-    @Put()
-    update() {
-        return this.UserService.update()
-    }
+    // @Put()
+    // update() {
+    //     return this.UserService.update()
+    // }
 
     @Delete()
-    delete() {
-        return this.UserService.delete()
+    remove(@Param('id') id: string) {
+        return this.UserService.remove(parseInt(id))
     }
 }
