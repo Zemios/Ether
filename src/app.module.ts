@@ -6,8 +6,6 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ApiModule } from './api/api.module';
 import { UserModule } from './api/user/user.module';
 import { User } from './api/user/user.entity';
-import { Post } from './api/post/post.entity';
-import { Comment } from './api/comment/comment.entity';
 
 @Module({
   imports: [
@@ -20,9 +18,8 @@ import { Comment } from './api/comment/comment.entity';
         port: parseInt(configService.get<string>('DB_PORT')),
         username: configService.get<string>('DB_USERNAME'),
         password: configService.get<string>('DB_PASSWORD'),
-        database: configService.get<string>('DB_NAME'),
-        entities: [__dirname + '../api/**/*.entity{.ts,.js}'],
-        // entities: [User, Comment, Post],
+        database: configService.get<string>('DB_DATABASE'),
+        entities: [__dirname + '/api/**/*.entity{.d.ts,.js}'],
         synchronize: true,
       }),
       inject: [ConfigService],

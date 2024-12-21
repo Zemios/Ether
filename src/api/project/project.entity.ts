@@ -21,8 +21,8 @@ export class Project {
     @Column('text', { nullable: true })
     image: string;
 
-    @Column('text', { array: true, nullable: true })
-    technologies: string[];
+    @Column('text', { nullable: true })
+    technologies: string;
 
     @Column('text', { nullable: true })
     github_link: string;
