@@ -17,7 +17,7 @@ import { ApiModule } from './api/api.module';
         username: configService.get<string>('DB_USERNAME'),
         password: configService.get<string>('DB_PASSWORD'),
         database: configService.get<string>('DB_NAME'),
-        entities: [__dirname + '/**/*.entity{.ts,.js}'],
+        entities: [__dirname + '.api/**/*.entity{.ts,.js}'],
         synchronize: true,
       }),
       inject: [ConfigService],
