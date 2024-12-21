@@ -1,9 +1,9 @@
-import { Comment } from "src/comment/comment.entity";
-import { Like } from "src/like/like.entity";
-import { News } from "src/news/news.entity";
-import { Post } from "src/post/post.entity";
-import { ProjectCollaborator } from "src/project-collaborator/project-collaborator.entity";
-import { UserProgress } from "src/user-progress/user-progress.entity";
+import { Comment } from "src/api/comment/comment.entity";
+import { Like } from "src/api/like/like.entity";
+import { News } from "src/api/news/news.entity";
+import { Post } from "src/api/post/post.entity";
+import { ProjectCollaborator } from "src/api/project-collaborator/project-collaborator.entity";
+import { UserProgress } from "src/api/user-progress/user-progress.entity";
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()

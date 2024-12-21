@@ -1,7 +1,7 @@
-import { Course } from "src/course/course.entity";
-import { Lesson } from "src/lesson/lesson.entity";
-import { Module } from "src/module/module.entity";
-import { User } from "src/user/user.entity";
+import { Course } from "src/api/course/course.entity";
+import { Lesson } from "src/api/lesson/lesson.entity";
+import { Module } from "src/api/module/module.entity";
+import { User } from "src/api/user/user.entity";
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()

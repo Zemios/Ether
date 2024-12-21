@@ -1,5 +1,5 @@
-import { Post } from "src/post/post.entity";
-import { User } from "src/user/user.entity";
+import { Post } from "src/api/post/post.entity";
+import { User } from "src/api/user/user.entity";
 import { Column, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 export class Comment {

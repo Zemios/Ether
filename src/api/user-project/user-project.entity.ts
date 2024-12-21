@@ -1,5 +1,5 @@
-import { Project } from "src/project/project.entity";
-import { User } from "src/user/user.entity";
+import { Project } from "src/api/project/project.entity";
+import { User } from "src/api/user/user.entity";
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()

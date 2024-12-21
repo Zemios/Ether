@@ -1,6 +1,7 @@
-import { Course } from "src/course/course.entity";
-import { Lesson } from "src/lesson/lesson.entity";
+import { Course } from "src/api/course/course.entity";
+import { Lesson } from "src/api/lesson/lesson.entity";
 import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { UserProgress } from "../user-progress/user-progress.entity";
 
 @Entity()
 export class Module {
@@ -11,7 +12,6 @@ export class Module {
     course_id: number;
 
     @ManyToOne(() => Course, (course) => course.modules)
-    @JoinColumn({ name: 'course_id' })
     course: Course;
 
     @Column('text')
@@ -25,4 +25,7 @@ export class Module {
 
     @OneToMany(() => Lesson, (lesson) => lesson.module)
     lessons: Lesson[];
+
+    @OneToMany(() => UserProgress, (progress) => progress.module)
+    progress: UserProgress[];
 }

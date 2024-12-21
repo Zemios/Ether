@@ -1,6 +1,6 @@
-import { News } from "src/news/news.entity";
-import { Post } from "src/post/post.entity";
-import { User } from "src/user/user.entity";
+import { News } from "src/api/news/news.entity";
+import { Post } from "src/api/post/post.entity";
+import { User } from "src/api/user/user.entity";
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()

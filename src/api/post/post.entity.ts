@@ -1,6 +1,6 @@
-import { Comment } from "src/comment/comment.entity";
-import { Like } from "src/like/like.entity";
-import { User } from "src/user/user.entity";
+import { Comment } from "src/api/comment/comment.entity";
+import { Like } from "src/api/like/like.entity";
+import { User } from "src/api/user/user.entity";
 import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
