@@ -1,4 +1,7 @@
 import { Module } from '@nestjs/common';
+import { ProjectCollaboratorController } from './project-collaborator.controller';
 
-@Module({})
+@Module({
+  controllers: [ProjectCollaboratorController]
+})
 export class ProjectCollaboratorModule {}
