@@ -1,6 +1,6 @@
-import { Project } from "src/api/project/project.entity";
-import { User } from "src/api/user/user.entity";
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Project } from "src/api/project/models/project.entity";
+import { User } from "src/api/user/models/user.entity";
 
 @Entity()
 export class UserProject {

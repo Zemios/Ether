@@ -1,7 +1,7 @@
-import { Comment } from "src/api/comment/comment.entity";
-import { Like } from "src/api/like/like.entity";
-import { User } from "src/api/user/user.entity";
 import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Comment } from "src/api/comment/models/comment.entity";
+import { Like } from "src/api/like/models/like.entity";
+import { User } from "src/api/user/models/user.entity";
 
 @Entity()
 export class Post {

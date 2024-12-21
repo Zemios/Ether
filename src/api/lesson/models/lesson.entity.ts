@@ -1,6 +1,6 @@
-import { Module } from "src/api/module/module.entity";
-import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import { UserProgress } from "../user-progress/user-progress.entity";
+import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Module } from 'src/api/module/models/module.entity';
+import { UserProgress } from "src/api/user-progress/models/user-progress.entity";
 
 @Entity()
 export class Lesson {

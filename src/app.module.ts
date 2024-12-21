@@ -5,7 +5,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ApiModule } from './api/api.module';
 import { UserModule } from './api/user/user.module';
-import { User } from './api/user/user.entity';
+import { User } from './api/user/models/user.entity';
 
 @Module({
   imports: [
@@ -19,7 +19,7 @@ import { User } from './api/user/user.entity';
         username: configService.get<string>('DB_USERNAME'),
         password: configService.get<string>('DB_PASSWORD'),
         database: configService.get<string>('DB_DATABASE'),
-        entities: [__dirname + '/api/**/*.entity{.d.ts,.js}'],
+        entities: [__dirname + '/api/**/models/*.entity{.d.ts,.js}'],
         synchronize: true,
       }),
       inject: [ConfigService],

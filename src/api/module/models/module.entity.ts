@@ -1,7 +1,7 @@
-import { Course } from "src/api/course/course.entity";
-import { Lesson } from "src/api/lesson/lesson.entity";
-import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import { UserProgress } from "../user-progress/user-progress.entity";
+import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Course } from "src/api/course/models/course.entity";
+import { Lesson } from "src/api/lesson/models/lesson.entity";
+import { UserProgress } from "src/api/user-progress/models/user-progress.entity";
 
 @Entity()
 export class Module {

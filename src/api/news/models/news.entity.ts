@@ -1,6 +1,6 @@
-import { User } from "src/api/user/user.entity";
-import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import { Like } from "../like/like.entity";
+import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { User } from "src/api/user/models/user.entity";
+import { Like } from "src/api/like/models/like.entity";
 
 @Entity()
 export class News {

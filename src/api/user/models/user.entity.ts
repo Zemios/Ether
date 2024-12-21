@@ -1,10 +1,10 @@
-import { Comment } from "src/api/comment/comment.entity";
-import { Like } from "src/api/like/like.entity";
-import { News } from "src/api/news/news.entity";
-import { Post } from "src/api/post/post.entity";
-import { ProjectCollaborator } from "src/api/project-collaborator/project-collaborator.entity";
-import { UserProgress } from "src/api/user-progress/user-progress.entity";
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Comment } from "src/api/comment/models/comment.entity";
+import { Like } from "src/api/like/models/like.entity";
+import { News } from "src/api/news/models/news.entity";
+import { Post } from "src/api/post/models/post.entity";
+import { ProjectCollaborator } from "src/api/project-collaborator/models/project-collaborator.entity";
+import { UserProgress } from "src/api/user-progress/models/user-progress.entity";
 
 @Entity()
 export class User {

@@ -1,5 +1,5 @@
-import { ProjectCollaborator } from "src/api/project-collaborator/project-collaborator.entity";
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { ProjectCollaborator } from "src/api/project-collaborator/models/project-collaborator.entity";
 
 @Entity()
 export class Project {
