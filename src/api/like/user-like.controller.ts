@@ -1,11 +1,11 @@
-import { LikeService } from './like.service';
+import { UserLikeService } from './user-like.service';
 import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
-import { CreateLikeDto } from './models/create-like-dto';
-import { Like as LikeEntity } from './models/like.entity';
+import { CreateUserLikeDto } from './models/create-user-like-dto';
+import { UserLike } from './models/user-like.entity';
 
 @Controller()
-export class LikeController {
-    constructor(private likeService: LikeService) { }
+export class UserLikeController {
+    constructor(private likeService: UserLikeService) { }
 
     @Get()
     findAll() {
@@ -18,12 +18,12 @@ export class LikeController {
     }
 
     @Post()
-    create(@Body() createLikeDto: CreateLikeDto): Promise<LikeEntity> {
+    create(@Body() createLikeDto: CreateUserLikeDto): Promise<UserLike> {
         return this.likeService.create(createLikeDto);
     }
 
     @Put('/:id')
-    update(@Param('id') id: string, @Body() updateLikeDto: CreateLikeDto): Promise<LikeEntity> {
+    update(@Param('id') id: string, @Body() updateLikeDto: CreateUserLikeDto): Promise<UserLike> {
         return this.likeService.update(parseInt(id), updateLikeDto);
     }
 

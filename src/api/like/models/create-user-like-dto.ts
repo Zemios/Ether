@@ -1,6 +1,6 @@
 import { IsOptional, IsNumber } from 'class-validator';
 
-export class CreateLikeDto {
+export class CreateUserLikeDto {
     @IsOptional()
     @IsNumber()
     user_id?: number;

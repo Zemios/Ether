@@ -1,17 +1,17 @@
-CREATE TABLE comments (
+CREATE TABLE comment (
     id integer NOT NULL,
     post_id integer,
     user_id integer,
     content text NOT NULL,
     creation_date timestamp with time zone DEFAULT now()
 );
-CREATE TABLE courses (
+CREATE TABLE course (
     id integer NOT NULL,
     title text NOT NULL,
     content json NOT NULL,
     creation_date timestamp with time zone DEFAULT now()
 );
-CREATE TABLE lessons (
+CREATE TABLE lesson (
     id integer NOT NULL,
     module_id integer,
     title text NOT NULL,
@@ -19,7 +19,7 @@ CREATE TABLE lessons (
     exercise text,
     lesson_order integer NOT NULL
 );
-CREATE TABLE likes (
+CREATE TABLE user_like (
     id integer NOT NULL,
     user_id integer,
     post_id integer,

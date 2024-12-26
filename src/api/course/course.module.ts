@@ -10,6 +10,5 @@ import { UserProgressModule } from '../user-progress/user-progress.module';
   imports: [TypeOrmModule.forFeature([Course]), ModuleModule, UserProgressModule],
   controllers: [CourseController],
   providers: [CourseService],
-  exports: [CourseService],
 })
 export class CourseModule { }

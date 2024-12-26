@@ -5,7 +5,7 @@ import { RouterModule } from '@nestjs/core';
 import { CommentModule } from './comment/comment.module';
 import { CourseModule } from './course/course.module';
 import { LessonModule } from './lesson/lesson.module';
-import { LikeModule } from './like/like.module';
+import { UserLikeModule } from './like/user-like.module';
 import { ModuleModule } from './module/module.module';
 import { NewsModule } from './news/news.module';
 import { PostModule } from './post/post.module';
@@ -39,8 +39,8 @@ import { UserProjectModule } from './user-project/user-project.module';
             module: LessonModule,
           },
           {
-            path: 'like',
-            module: LikeModule,
+            path: 'user-like',
+            module: UserLikeModule,
           },
           {
             path: 'module',
@@ -77,7 +77,7 @@ import { UserProjectModule } from './user-project/user-project.module';
     CommentModule,
     CourseModule,
     LessonModule,
-    LikeModule,
+    UserLikeModule,
     ModuleModule,
     NewsModule,
     PostModule,

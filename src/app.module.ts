@@ -8,7 +8,7 @@ import { UserModule } from './api/user/user.module';
 import { CommentModule } from './api/comment/comment.module';
 import { CourseModule } from './api/course/course.module';
 import { LessonModule } from './api/lesson/lesson.module';
-import { LikeModule } from './api/like/like.module';
+import { UserLikeModule } from './api/like/user-like.module';
 import { ModuleModule } from './api/module/module.module';
 import { NewsModule } from './api/news/news.module';
 import { PostModule } from './api/post/post.module';
@@ -39,7 +39,7 @@ import { UserProjectModule } from './api/user-project/user-project.module';
     CommentModule,
     CourseModule,
     LessonModule,
-    LikeModule,
+    UserLikeModule,
     ModuleModule,
     NewsModule,
     PostModule,

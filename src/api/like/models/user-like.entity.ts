@@ -4,7 +4,7 @@ import { Post } from "src/api/post/models/post.entity";
 import { User } from "src/api/user/models/user.entity";
 
 @Entity()
-export class Like {
+export class UserLike {
     @PrimaryGeneratedColumn()
     id: number;
 

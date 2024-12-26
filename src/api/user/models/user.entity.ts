@@ -1,6 +1,6 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Comment } from "src/api/comment/models/comment.entity";
-import { Like } from "src/api/like/models/like.entity";
+import { UserLike } from "src/api/like/models/user-like.entity";
 import { News } from "src/api/news/models/news.entity";
 import { Post } from "src/api/post/models/post.entity";
 import { ProjectCollaborator } from "src/api/project-collaborator/models/project-collaborator.entity";
@@ -35,8 +35,8 @@ export class User {
     @OneToMany(() => Post, (post) => post.user)
     posts: Post[];
 
-    @OneToMany(() => Like, (like) => like.user)
-    likes: Like[];
+    @OneToMany(() => UserLike, (like) => like.user)
+    likes: UserLike[];
 
     @OneToMany(() => News, (news) => news.author)
     news: News[];
