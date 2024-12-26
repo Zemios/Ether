@@ -20,10 +20,10 @@ export class UserController {
         return this.userService.create(createUserDto);
     }
 
-    // @Put()
-    // update() {
-    //     return this.UserService.update()
-    // }
+    @Put('/:id')
+    update(@Param('id') id: string, @Body() updateUserDto: CreateUserDto): Promise<User> {
+        return this.userService.update(parseInt(id), updateUserDto);
+    }
 
     @Delete('/:id')
     remove(@Param('id') id: string) {

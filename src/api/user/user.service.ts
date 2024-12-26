@@ -18,8 +18,14 @@ export class UserService {
     findOne(id: number): Promise<User | null> {
         return this.usersRepository.findOneBy({ id });
     }
-    create(user: CreateUserDto): Promise<User> {
-        return this.usersRepository.save(user);
+    async create(user: CreateUserDto): Promise<User> {
+        const newUser = this.usersRepository.create(user);
+        return this.usersRepository.save(newUser);
+    }
+
+    async update(id: number, updateUserDto: CreateUserDto): Promise<User> {
+        await this.usersRepository.update(id, updateUserDto);
+        return this.usersRepository.findOneBy({ id });
     }
     async remove(id: number): Promise<void> {
         await this.usersRepository.delete(id);
