@@ -10,17 +10,26 @@ export class Course {
     @Column('text')
     title: string;
 
-    @Column('json')
-    content: any;
+    @Column('text')
+    description: string;
+
+    @Column('int')
+    difficulty: number;
+
+    @Column('int')
+    estimated_duration: number;
+    @Column('simple-array')
+    technologies: string[];
+
+    @Column('simple-array')
+    content: number[];
 
     @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
     creation_date: Date;
 
-    // Add relationship to modules
     @OneToMany(() => Module, (module) => module.course)
     modules: Module[];
 
-    // Add relationship to user progress
     @OneToMany(() => UserProgress, (progress) => progress.course)
     progress: UserProgress[];
 }

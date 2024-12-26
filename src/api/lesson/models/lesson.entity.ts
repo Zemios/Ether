@@ -1,4 +1,4 @@
-import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Module } from 'src/api/module/models/module.entity';
 import { UserProgress } from "src/api/user-progress/models/user-progress.entity";
 
@@ -11,6 +11,7 @@ export class Lesson {
     module_id: number;
 
     @ManyToOne(() => Module, (module) => module.lessons)
+    @JoinColumn({ name: 'module_id' })
     module: Module;
 
     @Column('text')

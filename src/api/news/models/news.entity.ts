@@ -1,4 +1,4 @@
-import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { User } from "src/api/user/models/user.entity";
 import { UserLike } from "src/api/like/models/user-like.entity";
 
@@ -26,6 +26,7 @@ export class News {
     author_id: number;
 
     @ManyToOne(() => User, (user) => user.news)
+    @JoinColumn({ name: 'author_id' })
     author: User;
 
     // Add relationship to likes
