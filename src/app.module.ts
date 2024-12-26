@@ -5,7 +5,17 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ApiModule } from './api/api.module';
 import { UserModule } from './api/user/user.module';
-import { User } from './api/user/models/user.entity';
+import { CommentModule } from './api/comment/comment.module';
+import { CourseModule } from './api/course/course.module';
+import { LessonModule } from './api/lesson/lesson.module';
+import { LikeModule } from './api/like/like.module';
+import { ModuleModule } from './api/module/module.module';
+import { NewsModule } from './api/news/news.module';
+import { PostModule } from './api/post/post.module';
+import { ProjectModule } from './api/project/project.module';
+import { ProjectCollaboratorModule } from './api/project-collaborator/project-collaborator.module';
+import { UserProgressModule } from './api/user-progress/user-progress.module';
+import { UserProjectModule } from './api/user-project/user-project.module';
 
 @Module({
   imports: [
@@ -25,7 +35,18 @@ import { User } from './api/user/models/user.entity';
       inject: [ConfigService],
     }),
     ApiModule,
-    UserModule
+    UserModule,
+    CommentModule,
+    CourseModule,
+    LessonModule,
+    LikeModule,
+    ModuleModule,
+    NewsModule,
+    PostModule,
+    ProjectModule,
+    ProjectCollaboratorModule,
+    UserProgressModule,
+    UserProjectModule,
   ],
   controllers: [AppController],
   providers: [AppService],
