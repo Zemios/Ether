@@ -13,7 +13,6 @@ import { ModuleModule } from './api/module/module.module';
 import { NewsModule } from './api/news/news.module';
 import { PostModule } from './api/post/post.module';
 import { ProjectModule } from './api/project/project.module';
-import { ProjectCollaboratorModule } from './api/project-collaborator/project-collaborator.module';
 import { UserProgressModule } from './api/user-progress/user-progress.module';
 import { UserProjectModule } from './api/user-project/user-project.module';
 
@@ -44,7 +43,6 @@ import { UserProjectModule } from './api/user-project/user-project.module';
     NewsModule,
     PostModule,
     ProjectModule,
-    ProjectCollaboratorModule,
     UserProgressModule,
     UserProjectModule,
   ],

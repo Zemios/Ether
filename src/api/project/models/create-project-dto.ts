@@ -17,7 +17,7 @@ export class CreateProjectDto {
     @IsOptional()
     @IsString()
     @MaxLength(255)
-    technologies?: string;
+    technologies?: string[];
 
     @IsOptional()
     @IsUrl()

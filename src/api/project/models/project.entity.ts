@@ -6,10 +6,10 @@ export class Project {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column('text')
+    @Column({ type: 'varchar', length: 50 })
     name: string;
 
-    @Column('text')
+    @Column({ type: 'varchar', length: 560 })
     description: string;
 
     @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
@@ -18,19 +18,19 @@ export class Project {
     @Column({ type: 'timestamp', nullable: true })
     end_date: Date;
 
-    @Column('text', { nullable: true })
+    @Column({ type: 'varchar', length: 255, nullable: true })
     image: string;
 
-    @Column('text', { nullable: true })
-    technologies: string;
+    @Column('simple-array', { nullable: true })
+    technologies: string[];
 
-    @Column('text', { nullable: true })
+    @Column({ type: 'varchar', length: 255, nullable: true })
     github_link: string;
 
-    @Column('text', { nullable: true })
+    @Column({ type: 'varchar', length: 255, nullable: true })
     website_link: string;
 
-    @Column('text', { nullable: true })
+    @Column({ type: 'varchar', length: 280, nullable: true })
     subtitle: string;
 
     @OneToMany(() => UserProject, (user) => user.project)

@@ -21,7 +21,7 @@ export class Comment {
   @JoinColumn({ name: 'user_id' })
   user: User;
 
-  @Column('text')
+  @Column({ type: 'varchar', length: 280 })
   content: string;
 
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })

@@ -7,19 +7,19 @@ export class News {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column('text')
+    @Column({ type: 'varchar', length: 50 })
     title: string;
 
-    @Column('text')
+    @Column({ type: 'text' })
     content: string;
 
     @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
     publication_date: Date;
 
-    @Column('text', { nullable: true })
+    @Column({ type: 'varchar', length: 20, nullable: true })
     category: string;
 
-    @Column('text', { nullable: true })
+    @Column({ type: 'varchar', length: 255, nullable: true })
     image: string;
 
     @Column({ nullable: true })
@@ -29,7 +29,6 @@ export class News {
     @JoinColumn({ name: 'author_id' })
     author: User;
 
-    // Add relationship to likes
     @OneToMany(() => UserLike, (like) => like.news)
     likes: UserLike[];
 }

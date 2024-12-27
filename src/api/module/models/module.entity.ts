@@ -15,10 +15,10 @@ export class Module {
     @JoinColumn({ name: 'course_id' })
     course: Course;
 
-    @Column('text')
+    @Column({ type: 'varchar', length: 50 })
     title: string;
 
-    @Column('text', { nullable: true })
+    @Column({ type: 'varchar', length: 560 })
     description: string;
 
     @OneToMany(() => Lesson, (lesson) => lesson.module)

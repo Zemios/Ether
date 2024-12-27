@@ -17,16 +17,17 @@ export class User {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column('text')
+    @Column({ type: 'varchar', length: 50 })
     name: string;
 
-    @Column('text', { unique: true })
+    @Column({ type: 'varchar', length: 255, unique: true })
     email: string;
 
-    @Column('text')
+    /* TODO: add hashing for password */
+    @Column({ type: 'varchar', length: 255 })
     password: string;
 
-    @Column('text', { nullable: true })
+    @Column({ type: 'varchar', length: 280, nullable: true })
     about_me: string;
 
     @Column({ type: 'enum', enum: UserRole, default: UserRole.USER })

@@ -2,19 +2,25 @@ import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Module } from 'src/api/module/models/module.entity';
 import { UserProgress } from "src/api/user-progress/models/user-progress.entity";
 
+export enum courseDifficulty {
+    BEGINNER = 'begginer',
+    INTERMEDIATE = 'intermediate',
+    ADVANCED = 'advanced',
+}
+
 @Entity()
 export class Course {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column('text')
+    @Column({ type: 'varchar', length: 50 })
     title: string;
 
-    @Column('text')
+    @Column({ type: 'varchar', length: 280 })
     description: string;
 
-    @Column('int')
-    difficulty: number;
+    @Column({ type: 'enum', enum: courseDifficulty, default: courseDifficulty.BEGINNER })
+    difficulty: courseDifficulty;
 
     @Column('int')
     estimated_duration: number;

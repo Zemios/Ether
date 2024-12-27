@@ -14,13 +14,14 @@ export class Lesson {
     @JoinColumn({ name: 'module_id' })
     module: Module;
 
-    @Column('text')
+    @Column({ type: 'varchar', length: 50 })
     title: string;
 
-    @Column('text', { nullable: true })
+    @Column({ type: 'varchar', length: 280 })
     content: string;
 
-    @Column('text', { nullable: true })
+    @Column({ type: 'varchar', length: 255, nullable: true })
+
     exercise: string;
 
     @Column()

@@ -10,7 +10,6 @@ import { ModuleModule } from './module/module.module';
 import { NewsModule } from './news/news.module';
 import { PostModule } from './post/post.module';
 import { ProjectModule } from './project/project.module';
-import { ProjectCollaboratorModule } from './project-collaborator/project-collaborator.module';
 import { UserProgressModule } from './user-progress/user-progress.module';
 import { UserProjectModule } from './user-project/user-project.module';
 
@@ -59,10 +58,6 @@ import { UserProjectModule } from './user-project/user-project.module';
             module: ProjectModule,
           },
           {
-            path: 'project-collaborator',
-            module: ProjectCollaboratorModule,
-          },
-          {
             path: 'user-progress',
             module: UserProgressModule,
           },
@@ -82,7 +77,6 @@ import { UserProjectModule } from './user-project/user-project.module';
     NewsModule,
     PostModule,
     ProjectModule,
-    ProjectCollaboratorModule,
     UserProgressModule,
     UserProjectModule,
   ],

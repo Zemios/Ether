@@ -1,33 +1,31 @@
-import { Entity, JoinColumn, ManyToOne, PrimaryColumn } from "typeorm";
-import { User } from "src/api/user/models/user.entity";
-import { Post } from "src/api/post/models/post.entity";
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { News } from "src/api/news/models/news.entity";
-
-export enum LikeType {
-    POST = 'post',
-    NEWS = 'news',
-}
+import { Post } from "src/api/post/models/post.entity";
+import { User } from "src/api/user/models/user.entity";
 
 @Entity()
 export class UserLike {
-    @PrimaryColumn()
+    @PrimaryGeneratedColumn()
+    id: number;
+
+    @Column({ nullable: true })
     user_id: number;
 
     @ManyToOne(() => User, (user) => user.likes)
     @JoinColumn({ name: 'user_id' })
     user: User;
 
-    @PrimaryColumn({ type: 'enum', enum: LikeType })
-    like_type: LikeType;
+    @Column({ nullable: true })
+    post_id: number;
 
-    @PrimaryColumn()
-    target_id: number;
-
-    @ManyToOne(() => Post, (post) => post.likes, { nullable: true })
-    @JoinColumn({ name: 'entity_id' })
+    @ManyToOne(() => Post, (post) => post.likes)
+    @JoinColumn({ name: 'post_id' })
     post: Post;
 
-    @ManyToOne(() => News, (news) => news.likes, { nullable: true })
-    @JoinColumn({ name: 'entity_id' })
+    @Column({ nullable: true })
+    news_id: number;
+
+    @ManyToOne(() => News, (news) => news.likes)
+    @JoinColumn({ name: 'news_id' })
     news: News;
 }

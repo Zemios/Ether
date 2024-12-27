@@ -15,10 +15,10 @@ export class Post {
     @JoinColumn({ name: 'user_id' })
     user: User;
 
-    @Column('text')
+    @Column({ type: 'varchar', length: 100 })
     title: string;
 
-    @Column('text')
+    @Column({ type: 'varchar', length: 560 })
     content: string;
 
     @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
