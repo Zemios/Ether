@@ -17,10 +17,13 @@ export class UserProject {
     @Column({ nullable: true })
     project_id: number;
 
-    @ManyToOne(() => Project, (project) => project.collaborators)
+    @ManyToOne(() => Project, (project) => project.users)
     @JoinColumn({ name: 'project_id' })
     project: Project;
 
-    @Column('text', { nullable: true })
-    contribution: string;
+    @Column('int', { nullable: true })
+    pr_Approved: number;
+
+    @Column('bool', { default: false })
+    is_Admin: boolean;
 }

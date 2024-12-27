@@ -3,8 +3,14 @@ import { Comment } from "src/api/comment/models/comment.entity";
 import { UserLike } from "src/api/like/models/user-like.entity";
 import { News } from "src/api/news/models/news.entity";
 import { Post } from "src/api/post/models/post.entity";
-import { ProjectCollaborator } from "src/api/project-collaborator/models/project-collaborator.entity";
 import { UserProgress } from "src/api/user-progress/models/user-progress.entity";
+import { UserProject } from "src/api/user-project/models/user-project.entity";
+
+export enum UserRole {
+    ADMIN = 'admin',
+    MODERATOR = 'moderator',
+    USER = 'user',
+}
 
 @Entity()
 export class User {
@@ -23,8 +29,8 @@ export class User {
     @Column('text', { nullable: true })
     about_me: string;
 
-    @Column('text', { nullable: true })
-    role: string;
+    @Column({ type: 'enum', enum: UserRole, default: UserRole.USER })
+    role: UserRole;
 
     @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
     registration_date: Date;
@@ -44,6 +50,6 @@ export class User {
     @OneToMany(() => UserProgress, (progress) => progress.user)
     progress: UserProgress[];
 
-    @OneToMany(() => ProjectCollaborator, (collaborator) => collaborator.user)
-    projects: ProjectCollaborator[];
+    @OneToMany(() => UserProject, (project) => project.user)
+    projects: UserProject[];
 }

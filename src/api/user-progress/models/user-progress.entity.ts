@@ -9,7 +9,7 @@ export class UserProgress {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column({ nullable: true })
+    @Column()
     user_id: number;
 
     @ManyToOne(() => User, (user) => user.progress)
@@ -37,9 +37,6 @@ export class UserProgress {
     @JoinColumn({ name: 'lesson_id' })
     lesson: Lesson;
 
-    @Column({ default: false })
-    completed: boolean;
-
-    @Column({ type: 'timestamp', nullable: true })
+    @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
     completed_at: Date;
 }

@@ -8,7 +8,7 @@ export class Post {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column({ nullable: true })
+    @Column('int')
     user_id: number;
 
     @ManyToOne(() => User, (user) => user.posts)

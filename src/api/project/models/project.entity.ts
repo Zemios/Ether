@@ -1,5 +1,5 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import { ProjectCollaborator } from "src/api/project-collaborator/models/project-collaborator.entity";
+import { UserProject } from "src/api/user-project/models/user-project.entity";
 
 @Entity()
 export class Project {
@@ -33,6 +33,6 @@ export class Project {
     @Column('text', { nullable: true })
     subtitle: string;
 
-    @OneToMany(() => ProjectCollaborator, (collaborator) => collaborator.project)
-    collaborators: ProjectCollaborator[];
+    @OneToMany(() => UserProject, (user) => user.project)
+    users: UserProject[];
 }
