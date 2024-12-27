@@ -15,23 +15,23 @@ export class UserLikeService {
         return this.likeRepository.find({ relations: ['user', 'post', 'news'] });
     }
 
-    findOne(id: number): Promise<UserLike | null> {
+    findOne(user_id: number, target_id: number): Promise<UserLike | null> {
         return this.likeRepository.findOne({
-            where: { id },
+            where: { user_id, target_id },
             relations: ['user', 'post', 'news'],
         });
     }
 
-    async remove(id: number): Promise<void> {
-        await this.likeRepository.delete(id);
+    async remove(user_id: number, target_id: number): Promise<void> {
+        await this.likeRepository.delete({ user_id, target_id });
     }
 
     create(createLikeDto: CreateUserLikeDto): Promise<UserLike> {
         return this.likeRepository.save(createLikeDto);
     }
 
-    async update(id: number, updateLikeDto: CreateUserLikeDto): Promise<UserLike> {
-        await this.likeRepository.update(id, updateLikeDto);
-        return this.likeRepository.findOneBy({ id });
+    async update(user_id: number, target_id: number, updateLikeDto: CreateUserLikeDto): Promise<UserLike> {
+        await this.likeRepository.update({ user_id, target_id }, updateLikeDto);
+        return this.likeRepository.findOne({ where: { user_id, target_id } });
     }
 }
