@@ -29,6 +29,7 @@ import { QuestionsModule } from './courses/modules/lessons/questions/questions.m
 import { AnswersModule } from './courses/modules/lessons/questions/answers/answers.module';
 import { Question } from './courses/modules/lessons/questions/models/question.entity';
 import { Answer } from './courses/modules/lessons/questions/answers/models/answer.entity';
+import { AuthModule } from './auth/auth.module';
 
 
 @Module({
@@ -60,7 +61,8 @@ import { Answer } from './courses/modules/lessons/questions/answers/models/answe
     UsersProgressModule,
     UsersProjectsModule,
     QuestionsModule,
-    AnswersModule
+    AnswersModule,
+    AuthModule
   ],
   controllers: [AppController],
   providers: [AppService],
