@@ -1,8 +1,8 @@
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
-import { Course } from 'src/course/models/course.entity';
-import { Lesson } from 'src/lesson/models/lesson.entity';
-import { Module } from 'src/module/models/module.entity';
-import { User } from 'src/user/models/user.entity';
+import { User } from 'src/users/models/user.entity';
+import { Course } from 'src/courses/models/course.entity';
+import { Module } from 'src/courses/modules/models/module.entity';
+import { Lesson } from 'src/courses/modules/lessons/models/lesson.entity';
 
 @Entity()
 export class UserProgress {

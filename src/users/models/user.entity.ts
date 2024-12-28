@@ -1,10 +1,10 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
-import { Comment } from 'src/comment/models/comment.entity';
-import { UserLike } from 'src/like/models/user-like.entity';
+import { Comment } from 'src/posts/comments/models/comment.entity';
+import { UserLike } from 'src/users/users-likes/models/user-like.entity';
 import { News } from 'src/news/models/news.entity';
-import { Post } from 'src/post/models/post.entity';
-import { UserProgress } from 'src/user-progress/models/user-progress.entity';
-import { UserProject } from 'src/user-project/models/user-project.entity';
+import { Post } from 'src/posts/models/post.entity';
+import { UserProgress } from 'src/users/users-progress/models/user-progress.entity';
+import { UserProject } from 'src/users/users-projects/models/user-project.entity';
 
 export enum UserRole {
   ADMIN = 'admin',

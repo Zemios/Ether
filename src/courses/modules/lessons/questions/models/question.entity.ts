@@ -1,6 +1,6 @@
 import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
-import { Lesson } from 'src/lesson/models/lesson.entity';
-import { Answer } from 'src/answer/models/answer.entity';
+import { Lesson } from 'src/courses/modules/lessons/models/lesson.entity';
+import { Answer } from 'src/courses/modules/lessons/questions/answers/models/answer.entity';
 
 @Entity()
 export class Question {

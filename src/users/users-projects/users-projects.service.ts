@@ -5,11 +5,11 @@ import { UserProject } from './models/user-project.entity';
 import { CreateUserProjectDto } from './models/create-user-project-dto';
 
 @Injectable()
-export class UserProjectService {
+export class UsersProjectsService {
   constructor(
     @InjectRepository(UserProject)
     private userProjectRepository: Repository<UserProject>,
-  ) {}
+  ) { }
 
   findAll(): Promise<UserProject[]> {
     return this.userProjectRepository.find({ relations: ['user', 'project'] });

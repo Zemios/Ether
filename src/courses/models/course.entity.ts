@@ -1,6 +1,6 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
-import { Module } from 'src/module/models/module.entity';
-import { UserProgress } from 'src/user-progress/models/user-progress.entity';
+import { Module } from 'src/courses/modules/models/module.entity';
+import { UserProgress } from 'src/users/users-progress/models/user-progress.entity';
 
 export enum courseDifficulty {
   BEGINNER = 'begginer',

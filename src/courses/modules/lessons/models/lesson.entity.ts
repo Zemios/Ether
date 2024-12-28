@@ -1,7 +1,7 @@
 import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
-import { Module } from 'src/module/models/module.entity';
-import { UserProgress } from 'src/user-progress/models/user-progress.entity';
-import { Question } from 'src/question/models/question.entity';
+import { Module } from 'src/courses/modules/models/module.entity';
+import { UserProgress } from 'src/users/users-progress/models/user-progress.entity';
+import { Question } from 'src/courses/modules/lessons/questions/models/question.entity';
 
 @Entity()
 export class Lesson {
