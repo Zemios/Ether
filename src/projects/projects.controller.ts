@@ -1,34 +1,34 @@
-import { ProjectService } from './project.service';
+import { ProjectsService } from './projects.service';
 import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { CreateProjectDto } from './models/create-project-dto';
 import { Project } from './models/project.entity';
 
 @Controller('projects')
-export class ProjectController {
-  constructor(private projectService: ProjectService) { }
+export class ProjectsController {
+  constructor(private projectsService: ProjectsService) { }
 
   @Get()
   findAll() {
-    return this.projectService.findAll();
+    return this.projectsService.findAll();
   }
 
   @Get('/:id')
   findOne(@Param('id') id: string) {
-    return this.projectService.findOne(parseInt(id));
+    return this.projectsService.findOne(parseInt(id));
   }
 
   @Post()
   create(@Body() createProjectDto: CreateProjectDto): Promise<Project> {
-    return this.projectService.create(createProjectDto);
+    return this.projectsService.create(createProjectDto);
   }
 
   @Put('/:id')
   update(@Param('id') id: string, @Body() updateProjectDto: CreateProjectDto): Promise<Project> {
-    return this.projectService.update(parseInt(id), updateProjectDto);
+    return this.projectsService.update(parseInt(id), updateProjectDto);
   }
 
   @Delete('/:id')
   remove(@Param('id') id: string) {
-    return this.projectService.remove(parseInt(id));
+    return this.projectsService.remove(parseInt(id));
   }
 }

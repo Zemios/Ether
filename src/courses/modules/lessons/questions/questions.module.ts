@@ -1,11 +1,11 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { QuestionController } from './question.controller';
-import { QuestionService } from './question.service';
+import { QuestionsController } from './questions.controller';
+import { QuestionsService } from './questions.service';
 
 @Module({
   imports: [TypeOrmModule.forFeature([])],
-  controllers: [QuestionController],
-  providers: [QuestionService],
+  controllers: [QuestionsController],
+  providers: [QuestionsService],
 })
-export class QuestionModule {}
+export class QuestionsModule { }

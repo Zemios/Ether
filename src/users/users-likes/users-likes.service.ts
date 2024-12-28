@@ -5,11 +5,11 @@ import { UserLike } from './models/user-like.entity';
 import { CreateUserLikeDto } from './models/create-user-like-dto';
 
 @Injectable()
-export class UserLikeService {
+export class UsersLikesService {
   constructor(
     @InjectRepository(UserLike)
     private likeRepository: Repository<UserLike>,
-  ) {}
+  ) { }
 
   findAll(): Promise<UserLike[]> {
     return this.likeRepository.find({ relations: ['user', 'post', 'news'] });

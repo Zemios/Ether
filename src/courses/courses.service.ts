@@ -3,18 +3,15 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Course } from './models/course.entity';
 import { CreateCourseDto } from './models/create-course-dto';
-import { Module } from 'src/module/models/module.entity';
-import { UserProgress } from 'src/user-progress/models/user-progress.entity';
+import { Module } from './modules/models/module.entity';
 
 @Injectable()
-export class CourseService {
+export class CoursesService {
   constructor(
     @InjectRepository(Course)
     private courseRepository: Repository<Course>,
     @InjectRepository(Module)
     private moduleRepository: Repository<Module>,
-    @InjectRepository(UserProgress)
-    private userProgressRepository: Repository<UserProgress>,
   ) { }
 
   findAll(): Promise<Course[]> {

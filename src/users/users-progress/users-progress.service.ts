@@ -5,11 +5,11 @@ import { UserProgress } from './models/user-progress.entity';
 import { CreateUserProgressDto } from './models/create-user-progress-dto';
 
 @Injectable()
-export class UserProgressService {
+export class UsersProgressService {
   constructor(
     @InjectRepository(UserProgress)
     private userProgressRepository: Repository<UserProgress>,
-  ) {}
+  ) { }
 
   findAll(): Promise<UserProgress[]> {
     return this.userProgressRepository.find({ relations: ['user', 'course', 'module', 'lesson'] });

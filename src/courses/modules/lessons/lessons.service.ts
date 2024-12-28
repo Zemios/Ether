@@ -5,11 +5,11 @@ import { Lesson } from './models/lesson.entity';
 import { CreateLessonDto } from './models/create-lesson-dto';
 
 @Injectable()
-export class LessonService {
+export class LessonsService {
   constructor(
     @InjectRepository(Lesson)
     private lessonRepository: Repository<Lesson>,
-  ) {}
+  ) { }
 
   findAll(): Promise<Lesson[]> {
     return this.lessonRepository.find({ relations: ['module', 'progress'] });

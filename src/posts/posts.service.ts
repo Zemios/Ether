@@ -5,11 +5,11 @@ import { Post } from './models/post.entity';
 import { CreatePostDto } from './models/create-post-dto';
 
 @Injectable()
-export class PostService {
+export class PostsService {
   constructor(
     @InjectRepository(Post)
     private postRepository: Repository<Post>,
-  ) {}
+  ) { }
 
   findAll(): Promise<Post[]> {
     return this.postRepository.find({ relations: ['user', 'comments', 'likes'] });

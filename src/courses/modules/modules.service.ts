@@ -5,11 +5,11 @@ import { Module } from './models/module.entity';
 import { CreateModuleDto } from './models/create-module-dto';
 
 @Injectable()
-export class ModuleService {
+export class ModulesService {
   constructor(
     @InjectRepository(Module)
     private moduleRepository: Repository<Module>,
-  ) {}
+  ) { }
 
   findAll(): Promise<Module[]> {
     return this.moduleRepository.find({ relations: ['course', 'lessons', 'progress'] });

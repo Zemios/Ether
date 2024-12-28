@@ -5,11 +5,11 @@ import { Comment } from './models/comment.entity';
 import { CreateCommentDto } from './models/create-comment-dto';
 
 @Injectable()
-export class CommentService {
+export class CommentsService {
   constructor(
     @InjectRepository(Comment)
     private commentRepository: Repository<Comment>,
-  ) {}
+  ) { }
 
   findAll(): Promise<Comment[]> {
     return this.commentRepository.find({ relations: ['post', 'user'] });
