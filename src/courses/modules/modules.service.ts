@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Module } from './models/module.entity';
-import { CreateModuleDto } from './models/create-module-dto';
+import { Module } from './entities/module.entity';
+import { CreateModuleDto } from './dto/create-module-dto';
 
 @Injectable()
 export class ModulesService {

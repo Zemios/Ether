@@ -1,7 +1,7 @@
 import { LessonsService } from './lessons.service';
 import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
-import { CreateLessonDto } from './models/create-lesson-dto';
-import { Lesson as LessonEntity } from './models/lesson.entity';
+import { CreateLessonDto } from './dto/create-lesson-dto';
+import { Lesson as LessonEntity } from './entities/lesson.entity';
 
 @Controller('lessons')
 export class LessonsController {

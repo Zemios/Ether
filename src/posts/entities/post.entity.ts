@@ -1,7 +1,7 @@
 import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
-import { User } from 'src/users/models/user.entity';
-import { Comment } from 'src/posts/comments/models/comment.entity';
-import { UserLike } from 'src/users/users-likes/models/user-like.entity';
+import { User } from 'src/users/entities/user.entity';
+import { Comment } from 'src/posts/comments/entities/comment.entity';
+import { UserLike } from 'src/users/users-likes/entities/user-like.entity';
 
 @Entity()
 export class Post {

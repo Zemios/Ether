@@ -1,7 +1,7 @@
 import { UsersLikesService } from './users-likes.service';
 import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
-import { CreateUserLikeDto } from './models/create-user-like-dto';
-import { UserLike } from './models/user-like.entity';
+import { CreateUserLikeDto } from './dto/create-user-like-dto';
+import { UserLike } from './entities/user-like.entity';
 
 @Controller('likes')
 export class UsersLikesController {

@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { UsersLikesController } from './users-likes.controller';
-import { UserLike } from './models/user-like.entity';
+import { UserLike } from './entities/user-like.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsersLikesService } from './users-likes.service';
 

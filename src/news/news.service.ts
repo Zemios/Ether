@@ -1,15 +1,15 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { News } from './models/news.entity';
-import { CreateNewsDto } from './models/create-news-dto';
+import { News } from './entities/news.entity';
+import { CreateNewsDto } from './dto/create-news-dto';
 
 @Injectable()
 export class NewsService {
   constructor(
     @InjectRepository(News)
     private newsRepository: Repository<News>,
-  ) {}
+  ) { }
 
   findAll(): Promise<News[]> {
     return this.newsRepository.find({ relations: ['author', 'likes'] });

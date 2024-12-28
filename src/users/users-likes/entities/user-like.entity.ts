@@ -1,7 +1,7 @@
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
-import { News } from 'src/news/models/news.entity';
-import { User } from 'src/users/models/user.entity';
-import { Post } from 'src/posts/models/post.entity';
+import { News } from 'src/news/entities/news.entity';
+import { User } from 'src/users/entities/user.entity';
+import { Post } from 'src/posts/entities/post.entity';
 
 @Entity()
 export class UserLike {

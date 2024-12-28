@@ -1,4 +1,4 @@
-import { Module as ModuleEntity } from './models/module.entity';
+import { Module as ModuleEntity } from './entities/module.entity';
 import { Module } from '@nestjs/common';
 import { ModulesController } from './modules.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';

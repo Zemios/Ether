@@ -1,7 +1,7 @@
 import { CommentsService } from './comments.service';
 import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
-import { CreateCommentDto } from './models/create-comment-dto';
-import { Comment } from './models/comment.entity';
+import { CreateCommentDto } from './dto/create-comment-dto';
+import { Comment } from './entities/comment.entity';
 
 @Controller('comments')
 export class CommentsController {

@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { UserLike } from './models/user-like.entity';
-import { CreateUserLikeDto } from './models/create-user-like-dto';
+import { UserLike } from './entities/user-like.entity';
+import { CreateUserLikeDto } from './dto/create-user-like-dto';
 
 @Injectable()
 export class UsersLikesService {

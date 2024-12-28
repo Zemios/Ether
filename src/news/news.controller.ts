@@ -1,7 +1,7 @@
 import { NewsService } from './news.service';
 import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
-import { CreateNewsDto } from './models/create-news-dto';
-import { News as NewsEntity } from './models/news.entity';
+import { CreateNewsDto } from './dto/create-news-dto';
+import { News as NewsEntity } from './entities/news.entity';
 
 @Controller('news')
 export class NewsController {
