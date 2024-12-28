@@ -3,18 +3,17 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { ApiModule } from './api/api.module';
-import { UserModule } from './api/user/user.module';
-import { CommentModule } from './api/comment/comment.module';
-import { CourseModule } from './api/course/course.module';
-import { LessonModule } from './api/lesson/lesson.module';
-import { UserLikeModule } from './api/like/user-like.module';
-import { ModuleModule } from './api/module/module.module';
-import { NewsModule } from './api/news/news.module';
-import { PostModule } from './api/post/post.module';
-import { ProjectModule } from './api/project/project.module';
-import { UserProgressModule } from './api/user-progress/user-progress.module';
-import { UserProjectModule } from './api/user-project/user-project.module';
+import { UserModule } from './user/user.module';
+import { CommentModule } from './comment/comment.module';
+import { CourseModule } from './course/course.module';
+import { LessonModule } from './lesson/lesson.module';
+import { UserLikeModule } from './like/user-like.module';
+import { ModuleModule } from './module/module.module';
+import { NewsModule } from './news/news.module';
+import { PostModule } from './post/post.module';
+import { ProjectModule } from './project/project.module';
+import { UserProgressModule } from './user-progress/user-progress.module';
+import { UserProjectModule } from './user-project/user-project.module';
 
 @Module({
   imports: [
@@ -28,12 +27,11 @@ import { UserProjectModule } from './api/user-project/user-project.module';
         username: configService.get<string>('DB_USERNAME'),
         password: configService.get<string>('DB_PASSWORD'),
         database: configService.get<string>('DB_DATABASE'),
-        entities: [__dirname + '/api/**/models/*.entity{.d.ts,.js}'],
+        entities: [__dirname + '/**/models/*.entity{.d.ts,.js}'],
         synchronize: true,
       }),
       inject: [ConfigService],
     }),
-    ApiModule,
     UserModule,
     CommentModule,
     CourseModule,
@@ -49,4 +47,4 @@ import { UserProjectModule } from './api/user-project/user-project.module';
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule { }
