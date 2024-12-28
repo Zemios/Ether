@@ -22,8 +22,8 @@ export class UserProject {
     project: Project;
 
     @Column('int', { nullable: true })
-    pr_Approved: number;
+    pr_approved: number;
 
     @Column('bool', { default: false })
-    is_Admin: boolean;
+    is_admin: boolean;
 }
