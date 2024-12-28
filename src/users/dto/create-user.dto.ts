@@ -1,7 +1,7 @@
 // src/user/dto/create-user.dto.ts
 
 import { IsEmail, IsOptional, IsString, MaxLength } from 'class-validator';
-import { UserRole } from './user.entity';
+import { UserRole } from '../entities/user.entity';
 
 export class CreateUserDto {
   @IsString()

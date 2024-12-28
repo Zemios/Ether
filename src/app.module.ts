@@ -23,7 +23,7 @@ import { Module as ModuleEntity } from './courses/modules/entities/module.entity
 import { News } from './news/entities/news.entity';
 import { Post } from './posts/entities/post.entity';
 import { Project } from './projects/entities/project.entity';
-import { UserProgress } from './users/users-progress/models/user-progress.entity';
+import { UserProgress } from './users/users-progress/entities/user-progress.entity';
 import { UserProject } from './users/users-projects/entities/user-project.entity';
 import { QuestionsModule } from './courses/modules/lessons/questions/questions.module';
 import { AnswersModule } from './courses/modules/lessons/questions/answers/answers.module';

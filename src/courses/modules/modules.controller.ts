@@ -1,6 +1,6 @@
 import { ModulesService } from './modules.service';
 import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
-import { CreateModuleDto } from './dto/create-module-dto';
+import { CreateModuleDto } from './dto/create-module.dto';
 import { Module as ModuleEntity } from './entities/module.entity';
 
 @Controller('modules')

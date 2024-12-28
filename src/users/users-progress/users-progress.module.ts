@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { UsersProgressController } from './users-progress.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { UserProgress } from './models/user-progress.entity';
+import { UserProgress } from './entities/user-progress.entity';
 import { UsersProgressService } from './users-progress.service';
 
 @Module({

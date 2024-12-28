@@ -3,7 +3,7 @@ import { Comment } from 'src/posts/comments/entities/comment.entity';
 import { UserLike } from 'src/users/users-likes/entities/user-like.entity';
 import { News } from 'src/news/entities/news.entity';
 import { Post } from 'src/posts/entities/post.entity';
-import { UserProgress } from 'src/users/users-progress/models/user-progress.entity';
+import { UserProgress } from 'src/users/users-progress/entities/user-progress.entity';
 import { UserProject } from 'src/users/users-projects/entities/user-project.entity';
 
 export enum UserRole {

@@ -1,4 +1,4 @@
-import { CreateUserDto } from './entities/create-user.dto';
+import { CreateUserDto } from './dto/create-user.dto';
 import { User } from './entities/user.entity';
 import { UsersService } from './users.service';
 import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';

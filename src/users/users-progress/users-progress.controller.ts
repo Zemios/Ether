@@ -1,7 +1,7 @@
 import { UsersProgressService } from './users-progress.service';
 import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
-import { CreateUserProgressDto } from './models/create-user-progress-dto';
-import { UserProgress } from './models/user-progress.entity';
+import { CreateUserProgressDto } from './dto/create-user-progress.dto';
+import { UserProgress } from './entities/user-progress.entity';
 
 @Controller('users-progress')
 export class UsersProgressController {

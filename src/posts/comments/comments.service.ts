@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Comment } from './entities/comment.entity';
-import { CreateCommentDto } from './dto/create-comment-dto';
+import { CreateCommentDto } from './dto/create-commentdto';
 
 @Injectable()
 export class CommentsService {
