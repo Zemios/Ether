@@ -5,30 +5,30 @@ import { UserProject } from './models/user-project.entity';
 
 @Controller()
 export class UserProjectController {
-    constructor(private userProjectService: UserProjectService) { }
+  constructor(private userProjectService: UserProjectService) {}
 
-    @Get()
-    findAll() {
-        return this.userProjectService.findAll();
-    }
+  @Get()
+  findAll() {
+    return this.userProjectService.findAll();
+  }
 
-    @Get('/:id')
-    findOne(@Param('id') id: string) {
-        return this.userProjectService.findOne(parseInt(id));
-    }
+  @Get('/:id')
+  findOne(@Param('id') id: string) {
+    return this.userProjectService.findOne(parseInt(id));
+  }
 
-    @Post()
-    create(@Body() createUserProjectDto: CreateUserProjectDto): Promise<UserProject> {
-        return this.userProjectService.create(createUserProjectDto);
-    }
+  @Post()
+  create(@Body() createUserProjectDto: CreateUserProjectDto): Promise<UserProject> {
+    return this.userProjectService.create(createUserProjectDto);
+  }
 
-    @Put('/:id')
-    update(@Param('id') id: string, @Body() updateUserProjectDto: CreateUserProjectDto): Promise<UserProject> {
-        return this.userProjectService.update(parseInt(id), updateUserProjectDto);
-    }
+  @Put('/:id')
+  update(@Param('id') id: string, @Body() updateUserProjectDto: CreateUserProjectDto): Promise<UserProject> {
+    return this.userProjectService.update(parseInt(id), updateUserProjectDto);
+  }
 
-    @Delete('/:id')
-    remove(@Param('id') id: string) {
-        return this.userProjectService.remove(parseInt(id));
-    }
+  @Delete('/:id')
+  remove(@Param('id') id: string) {
+    return this.userProjectService.remove(parseInt(id));
+  }
 }

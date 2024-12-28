@@ -5,30 +5,30 @@ import { Comment } from './models/comment.entity';
 
 @Controller()
 export class CommentController {
-    constructor(private commentService: CommentService) { }
+  constructor(private commentService: CommentService) {}
 
-    @Get()
-    findAll() {
-        return this.commentService.findAll();
-    }
+  @Get()
+  findAll() {
+    return this.commentService.findAll();
+  }
 
-    @Get('/:id')
-    findOne(@Param('id') id: string) {
-        return this.commentService.findOne(parseInt(id));
-    }
+  @Get('/:id')
+  findOne(@Param('id') id: string) {
+    return this.commentService.findOne(parseInt(id));
+  }
 
-    @Post()
-    create(@Body() createCommentDto: CreateCommentDto): Promise<Comment> {
-        return this.commentService.create(createCommentDto);
-    }
+  @Post()
+  create(@Body() createCommentDto: CreateCommentDto): Promise<Comment> {
+    return this.commentService.create(createCommentDto);
+  }
 
-    @Put('/:id')
-    update(@Param('id') id: string, @Body() updateCommentDto: CreateCommentDto): Promise<Comment> {
-        return this.commentService.update(parseInt(id), updateCommentDto);
-    }
+  @Put('/:id')
+  update(@Param('id') id: string, @Body() updateCommentDto: CreateCommentDto): Promise<Comment> {
+    return this.commentService.update(parseInt(id), updateCommentDto);
+  }
 
-    @Delete('/:id')
-    remove(@Param('id') id: string) {
-        return this.commentService.remove(parseInt(id));
-    }
+  @Delete('/:id')
+  remove(@Param('id') id: string) {
+    return this.commentService.remove(parseInt(id));
+  }
 }

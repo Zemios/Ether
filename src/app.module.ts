@@ -49,4 +49,4 @@ import { UserProjectModule } from './api/user-project/user-project.module';
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule { }
+export class AppModule {}

@@ -6,32 +6,32 @@ import { CreateModuleDto } from './models/create-module-dto';
 
 @Injectable()
 export class ModuleService {
-    constructor(
-        @InjectRepository(Module)
-        private moduleRepository: Repository<Module>,
-    ) { }
+  constructor(
+    @InjectRepository(Module)
+    private moduleRepository: Repository<Module>,
+  ) {}
 
-    findAll(): Promise<Module[]> {
-        return this.moduleRepository.find({ relations: ['course', 'lessons', 'progress'] });
-    }
+  findAll(): Promise<Module[]> {
+    return this.moduleRepository.find({ relations: ['course', 'lessons', 'progress'] });
+  }
 
-    findOne(id: number): Promise<Module | null> {
-        return this.moduleRepository.findOne({
-            where: { id },
-            relations: ['course', 'lessons', 'progress'],
-        });
-    }
+  findOne(id: number): Promise<Module | null> {
+    return this.moduleRepository.findOne({
+      where: { id },
+      relations: ['course', 'lessons', 'progress'],
+    });
+  }
 
-    async remove(id: number): Promise<void> {
-        await this.moduleRepository.delete(id);
-    }
+  async remove(id: number): Promise<void> {
+    await this.moduleRepository.delete(id);
+  }
 
-    create(createModuleDto: CreateModuleDto): Promise<Module> {
-        return this.moduleRepository.save(createModuleDto);
-    }
+  create(createModuleDto: CreateModuleDto): Promise<Module> {
+    return this.moduleRepository.save(createModuleDto);
+  }
 
-    async update(id: number, updateModuleDto: CreateModuleDto): Promise<Module> {
-        await this.moduleRepository.update(id, updateModuleDto);
-        return this.moduleRepository.findOneBy({ id });
-    }
+  async update(id: number, updateModuleDto: CreateModuleDto): Promise<Module> {
+    await this.moduleRepository.update(id, updateModuleDto);
+    return this.moduleRepository.findOneBy({ id });
+  }
 }

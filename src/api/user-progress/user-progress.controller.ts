@@ -5,30 +5,30 @@ import { UserProgress } from './models/user-progress.entity';
 
 @Controller()
 export class UserProgressController {
-    constructor(private userProgressService: UserProgressService) { }
+  constructor(private userProgressService: UserProgressService) {}
 
-    @Get()
-    findAll() {
-        return this.userProgressService.findAll();
-    }
+  @Get()
+  findAll() {
+    return this.userProgressService.findAll();
+  }
 
-    @Get('/:id')
-    findOne(@Param('id') id: string) {
-        return this.userProgressService.findOne(parseInt(id));
-    }
+  @Get('/:id')
+  findOne(@Param('id') id: string) {
+    return this.userProgressService.findOne(parseInt(id));
+  }
 
-    @Post()
-    create(@Body() createUserProgressDto: CreateUserProgressDto): Promise<UserProgress> {
-        return this.userProgressService.create(createUserProgressDto);
-    }
+  @Post()
+  create(@Body() createUserProgressDto: CreateUserProgressDto): Promise<UserProgress> {
+    return this.userProgressService.create(createUserProgressDto);
+  }
 
-    @Put('/:id')
-    update(@Param('id') id: string, @Body() updateUserProgressDto: CreateUserProgressDto): Promise<UserProgress> {
-        return this.userProgressService.update(parseInt(id), updateUserProgressDto);
-    }
+  @Put('/:id')
+  update(@Param('id') id: string, @Body() updateUserProgressDto: CreateUserProgressDto): Promise<UserProgress> {
+    return this.userProgressService.update(parseInt(id), updateUserProgressDto);
+  }
 
-    @Delete('/:id')
-    remove(@Param('id') id: string) {
-        return this.userProgressService.remove(parseInt(id));
-    }
+  @Delete('/:id')
+  remove(@Param('id') id: string) {
+    return this.userProgressService.remove(parseInt(id));
+  }
 }

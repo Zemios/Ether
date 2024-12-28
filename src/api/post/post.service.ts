@@ -6,32 +6,32 @@ import { CreatePostDto } from './models/create-post-dto';
 
 @Injectable()
 export class PostService {
-    constructor(
-        @InjectRepository(Post)
-        private postRepository: Repository<Post>,
-    ) { }
+  constructor(
+    @InjectRepository(Post)
+    private postRepository: Repository<Post>,
+  ) {}
 
-    findAll(): Promise<Post[]> {
-        return this.postRepository.find({ relations: ['user', 'comments', 'likes'] });
-    }
+  findAll(): Promise<Post[]> {
+    return this.postRepository.find({ relations: ['user', 'comments', 'likes'] });
+  }
 
-    findOne(id: number): Promise<Post | null> {
-        return this.postRepository.findOne({
-            where: { id },
-            relations: ['user', 'comments', 'likes'],
-        });
-    }
+  findOne(id: number): Promise<Post | null> {
+    return this.postRepository.findOne({
+      where: { id },
+      relations: ['user', 'comments', 'likes'],
+    });
+  }
 
-    async remove(id: number): Promise<void> {
-        await this.postRepository.delete(id);
-    }
+  async remove(id: number): Promise<void> {
+    await this.postRepository.delete(id);
+  }
 
-    create(createPostDto: CreatePostDto): Promise<Post> {
-        return this.postRepository.save(createPostDto);
-    }
+  create(createPostDto: CreatePostDto): Promise<Post> {
+    return this.postRepository.save(createPostDto);
+  }
 
-    async update(id: number, updatePostDto: CreatePostDto): Promise<Post> {
-        await this.postRepository.update(id, updatePostDto);
-        return this.postRepository.findOneBy({ id });
-    }
+  async update(id: number, updatePostDto: CreatePostDto): Promise<Post> {
+    await this.postRepository.update(id, updatePostDto);
+    return this.postRepository.findOneBy({ id });
+  }
 }

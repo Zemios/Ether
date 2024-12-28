@@ -11,4 +11,4 @@ import { UserProgressModule } from '../user-progress/user-progress.module';
   controllers: [CourseController],
   providers: [CourseService],
 })
-export class CourseModule { }
+export class CourseModule {}

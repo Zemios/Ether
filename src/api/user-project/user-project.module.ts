@@ -7,6 +7,6 @@ import { UserProject } from './models/user-project.entity';
 @Module({
   imports: [TypeOrmModule.forFeature([UserProject])],
   controllers: [UserProjectController],
-  providers: [UserProjectService]
+  providers: [UserProjectService],
 })
-export class UserProjectModule { }
+export class UserProjectModule {}

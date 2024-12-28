@@ -6,28 +6,28 @@ import { CreateUserDto } from './models/create-user.dto';
 
 @Injectable()
 export class UserService {
-    constructor(
-        @InjectRepository(User)
-        private usersRepository: Repository<User>,
-    ) { }
+  constructor(
+    @InjectRepository(User)
+    private usersRepository: Repository<User>,
+  ) {}
 
-    findAll(): Promise<User[]> {
-        return this.usersRepository.find();
-    }
+  findAll(): Promise<User[]> {
+    return this.usersRepository.find();
+  }
 
-    findOne(id: number): Promise<User | null> {
-        return this.usersRepository.findOneBy({ id });
-    }
-    async create(user: CreateUserDto): Promise<User> {
-        const newUser = this.usersRepository.create(user);
-        return this.usersRepository.save(newUser);
-    }
+  findOne(id: number): Promise<User | null> {
+    return this.usersRepository.findOneBy({ id });
+  }
+  async create(user: CreateUserDto): Promise<User> {
+    const newUser = this.usersRepository.create(user);
+    return this.usersRepository.save(newUser);
+  }
 
-    async update(id: number, updateUserDto: CreateUserDto): Promise<User> {
-        await this.usersRepository.update(id, updateUserDto);
-        return this.usersRepository.findOneBy({ id });
-    }
-    async remove(id: number): Promise<void> {
-        await this.usersRepository.delete(id);
-    }
+  async update(id: number, updateUserDto: CreateUserDto): Promise<User> {
+    await this.usersRepository.update(id, updateUserDto);
+    return this.usersRepository.findOneBy({ id });
+  }
+  async remove(id: number): Promise<void> {
+    await this.usersRepository.delete(id);
+  }
 }

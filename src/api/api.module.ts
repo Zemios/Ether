@@ -81,4 +81,4 @@ import { UserProjectModule } from './user-project/user-project.module';
     UserProjectModule,
   ],
 })
-export class ApiModule { }
+export class ApiModule {}

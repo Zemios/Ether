@@ -7,6 +7,6 @@ import { UserLikeService } from './user-like.service';
 @Module({
   imports: [TypeOrmModule.forFeature([UserLike])],
   controllers: [UserLikeController],
-  providers: [UserLikeService]
+  providers: [UserLikeService],
 })
-export class UserLikeModule { }
+export class UserLikeModule {}

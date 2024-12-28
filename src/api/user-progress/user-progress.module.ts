@@ -8,6 +8,6 @@ import { UserProgressService } from './user-progress.service';
   imports: [TypeOrmModule.forFeature([UserProgress])],
   controllers: [UserProgressController],
   providers: [UserProgressService],
-  exports: [TypeOrmModule]
+  exports: [TypeOrmModule],
 })
-export class UserProgressModule { }
+export class UserProgressModule {}
