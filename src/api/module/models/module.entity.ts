@@ -18,7 +18,7 @@ export class Module {
     @Column({ type: 'varchar', length: 50 })
     title: string;
 
-    @Column({ type: 'varchar', length: 560 })
+    @Column({ type: 'varchar', length: 280, nullable: true })
     description: string;
 
     @OneToMany(() => Lesson, (lesson) => lesson.module)

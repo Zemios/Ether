@@ -17,15 +17,11 @@ export class Lesson {
     @Column({ type: 'varchar', length: 50 })
     title: string;
 
-    @Column({ type: 'varchar', length: 280 })
+    @Column('text')
     content: string;
 
-    @Column({ type: 'varchar', length: 255, nullable: true })
-
-    exercise: string;
-
-    @Column()
-    lesson_order: number;
+    @Column({ type: 'varchar', length: 20 })
+    lesson_type: string;
 
     @OneToMany(() => UserProgress, (progress) => progress.lesson)
     progress: UserProgress[];

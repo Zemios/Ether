@@ -27,9 +27,6 @@ export class Course {
     @Column('simple-array')
     technologies: string[];
 
-    @Column('simple-array')
-    content: number[];
-
     @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
     creation_date: Date;
 
