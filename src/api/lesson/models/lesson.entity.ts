@@ -1,6 +1,7 @@
 import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { Module } from 'src/api/module/models/module.entity';
 import { UserProgress } from 'src/api/user-progress/models/user-progress.entity';
+import { Question } from 'src/api/question/models/question.entity';
 
 @Entity()
 export class Lesson {
@@ -25,4 +26,7 @@ export class Lesson {
 
   @OneToMany(() => UserProgress, (progress) => progress.lesson)
   progress: UserProgress[];
+
+  @OneToMany(() => Question, (questions) => questions.lesson)
+  questions: Question[];
 }
