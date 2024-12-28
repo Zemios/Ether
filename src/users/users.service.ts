@@ -5,11 +5,11 @@ import { Repository } from 'typeorm';
 import { CreateUserDto } from './models/create-user.dto';
 
 @Injectable()
-export class UserService {
+export class UsersService {
   constructor(
     @InjectRepository(User)
     private usersRepository: Repository<User>,
-  ) {}
+  ) { }
 
   findAll(): Promise<User[]> {
     return this.usersRepository.find();
