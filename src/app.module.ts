@@ -44,7 +44,7 @@ import { AuthModule } from './auth/auth.module';
         username: configService.get<string>('DB_USERNAME'),
         password: configService.get<string>('DB_PASSWORD'),
         database: configService.get<string>('DB_DATABASE'),
-        entities: [User, Comment, Course, Lesson, UserLike, ModuleEntity, News, Post, Project, UserProgress, UserProject, Question, Answer],
+        autoLoadEntities: true,
         synchronize: true,
       }),
       inject: [ConfigService],
