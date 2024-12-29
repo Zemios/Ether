@@ -1,6 +1,7 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { UsersService } from 'src/users/users.service';
 import { RegisterDto } from './dto/register.dto';
+import { hash } from 'bcryptjs';
 
 @Injectable()
 export class AuthService {
@@ -12,7 +13,7 @@ export class AuthService {
             throw new BadRequestException('Email already exists');
         }
 
-        return await this.userService.create({ name, email, password });
+        return await this.userService.create({ name, email, password: await hash(password, 10) });
     }
 
     login() {
