@@ -1,3 +1,4 @@
+import { UserActiveInterface } from './../common/interfaces/user-active.interface';
 import { Body, Controller, Get, Post, Request, UseGuards } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { RegisterDto } from './dto/register.dto';
@@ -8,6 +9,7 @@ import { NeedRole } from './decorators/need-role.decorator';
 import { RoleGuard } from './guards/role.guard';
 import { Role } from '../common/enums/role.enum';
 import { Auth } from './decorators/auth.decorator';
+import { ActiveUser } from 'src/common/decorators/active-user.decorator';
 
 @Controller('auth')
 export class AuthController {
@@ -26,7 +28,7 @@ export class AuthController {
 
     @Get('profile')
     @Auth(Role.USER)
-    profile(@Request() req: RequestWithUser) {
-        return this.authService.profile(req.user);
+    profile(@ActiveUser() user: UserActiveInterface) {
+        return this.authService.profile(user);
     }
 }
