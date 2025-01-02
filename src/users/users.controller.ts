@@ -8,11 +8,11 @@ export class UsersController {
   constructor(private usersService: UsersService) { }
   @Get()
   findAll() {
-    return this.usersService.findAll();
+    return this.usersService.findAll(); // TODO: Proteger ruta (SOLO ADMIN(?) o que al menos no devuelva las contraseñas ni las id??)
   }
   @Get('/:id')
   findOne(@Param('id') id: string) {
-    return this.usersService.findOne(parseInt(id));
+    return this.usersService.findOne(parseInt(id)); // TODO: Proteger ruta (SOLO ADMIN(?)) o que no de contraseña por lo menos
   }
 
   @Post()
@@ -22,11 +22,11 @@ export class UsersController {
 
   @Put('/:id')
   update(@Param('id') id: string, @Body() updateUserDto: CreateUserDto): Promise<User> {
-    return this.usersService.update(parseInt(id), updateUserDto);
+    return this.usersService.update(parseInt(id), updateUserDto); // TODO: Proteger ruta (SOLO EL MISMO USUARIO SE PUEDE ACTUALIZAR A SI MISMO, O UN ADMIN)
   }
 
   @Delete('/:id')
   remove(@Param('id') id: string) {
-    return this.usersService.remove(parseInt(id));
+    return this.usersService.remove(parseInt(id)); // TODO: Proteger ruta (SOLO ADMIN(?) O EL PROPIO USUARIO)
   }
 }
