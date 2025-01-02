@@ -2,7 +2,10 @@ import { LessonsService } from './lessons.service';
 import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { CreateLessonDto } from './dto/create-lesson.dto';
 import { Lesson as LessonEntity } from './entities/lesson.entity';
+import { Auth } from 'src/auth/decorators/auth.decorator';
+import { Role } from 'src/common/enums/role.enum';
 
+@Auth(Role.USER)
 @Controller('lessons')
 export class LessonsController {
   constructor(private lessonsService: LessonsService) { }

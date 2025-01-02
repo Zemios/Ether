@@ -2,7 +2,10 @@ import { UsersProjectsService } from './users-projects.service';
 import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { CreateUserProjectDto } from './dto/create-user-project.dto';
 import { UserProject } from './entities/user-project.entity';
+import { Auth } from 'src/auth/decorators/auth.decorator';
+import { Role } from 'src/common/enums/role.enum';
 
+@Auth(Role.USER)
 @Controller('users-projects')
 export class UsersProjectsController {
   constructor(private usersProjectsService: UsersProjectsService) { }

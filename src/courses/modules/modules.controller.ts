@@ -2,7 +2,10 @@ import { ModulesService } from './modules.service';
 import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { CreateModuleDto } from './dto/create-module.dto';
 import { Module as ModuleEntity } from './entities/module.entity';
+import { Auth } from 'src/auth/decorators/auth.decorator';
+import { Role } from 'src/common/enums/role.enum';
 
+@Auth(Role.USER)
 @Controller('modules')
 export class ModulesController {
   constructor(private modulesService: ModulesService) { }

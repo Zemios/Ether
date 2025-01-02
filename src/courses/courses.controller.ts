@@ -2,7 +2,10 @@ import { Controller, Get, Param, Post, Body, Put, Delete } from '@nestjs/common'
 import { CoursesService } from './courses.service';
 import { CreateCourseDto } from './dto/create-course.dto';
 import { Course } from './entities/course.entity';
+import { Role } from 'src/common/enums/role.enum';
+import { Auth } from 'src/auth/decorators/auth.decorator';
 
+@Auth(Role.USER)
 @Controller('courses')
 export class CoursesController {
   constructor(private coursesService: CoursesService) { }

@@ -2,7 +2,10 @@ import { Controller, Post, Get, Param, Delete, Body } from '@nestjs/common';
 import { AnswersService } from './answers.service';
 import { CreateAnswerDto } from './dto/create-answer.dto';
 import { Answer } from './entities/answer.entity';
+import { Auth } from 'src/auth/decorators/auth.decorator';
+import { Role } from 'src/common/enums/role.enum';
 
+@Auth(Role.USER)
 @Controller('answers')
 export class AnswersController {
     constructor(private readonly answersService: AnswersService) { }
