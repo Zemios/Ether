@@ -1,5 +1,3 @@
-// src/user/dto/create-user.dto.ts
-
 import { IsEmail, IsOptional, IsString, MaxLength } from 'class-validator';
 import { Role } from 'src/common/enums/role.enum';
 
