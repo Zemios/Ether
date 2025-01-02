@@ -12,7 +12,7 @@ export class AuthService {
         private readonly jwtService: JwtService,
     ) { }
     async register({ name, email, password }: RegisterDto): Promise<any> {
-        const user = await this.userService.findOneByEmailByPassword(email)
+        const user = await this.userService.findOneByEmail(email)
 
         if (user) {
             throw new BadRequestException('Email already exists');
@@ -24,7 +24,7 @@ export class AuthService {
     }
 
     async login({ email, password }: LoginDto) {
-        const user = await this.userService.findOneByEmail(email)
+        const user = await this.userService.findOneByEmailByPassword(email)
 
         if (user) {
             if (await compare(password, user.password)) {
