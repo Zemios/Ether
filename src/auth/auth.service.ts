@@ -18,7 +18,9 @@ export class AuthService {
             throw new BadRequestException('Email already exists');
         }
 
-        return await this.userService.create({ name, email, password: await hash(password, 10) });
+        await this.userService.create({ name, email, password: await hash(password, 10) });
+
+        return { name, email }
     }
 
     async login({ email, password }: LoginDto) {
