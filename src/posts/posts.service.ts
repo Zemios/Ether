@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Post } from './entities/post.entity';
 import { CreatePostDto } from './dto/create-post.dto';
+import { UserActiveInterface } from 'src/common/interfaces/user-active.interface';
 
 @Injectable()
 export class PostsService {
@@ -26,8 +27,12 @@ export class PostsService {
     await this.postRepository.delete(id);
   }
 
-  create(createPostDto: CreatePostDto): Promise<Post> {
-    return this.postRepository.save(createPostDto);
+  create(createPostDto: CreatePostDto, user: UserActiveInterface): Promise<Post> {
+    console.log(user)
+    return this.postRepository.save({
+      ...createPostDto,
+      user_id: user.id,
+    });
   }
 
   async update(id: number, updatePostDto: CreatePostDto): Promise<Post> {

@@ -2,6 +2,10 @@ import { PostsService } from './posts.service';
 import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { CreatePostDto } from './dto/create-post.dto';
 import { Post as PostEntity } from './entities/post.entity';
+import { ActiveUser } from 'src/common/decorators/active-user.decorator';
+import { UserActiveInterface } from 'src/common/interfaces/user-active.interface';
+import { Auth } from 'src/auth/decorators/auth.decorator';
+import { Role } from 'src/common/enums/role.enum';
 
 @Controller('posts')
 export class PostsController {
@@ -18,8 +22,9 @@ export class PostsController {
   }
 
   @Post()
-  create(@Body() createPostDto: CreatePostDto): Promise<PostEntity> {
-    return this.postsService.create(createPostDto);
+  @Auth(Role.USER)
+  create(@Body() createPostDto: CreatePostDto, @ActiveUser() user: UserActiveInterface): Promise<PostEntity> {
+    return this.postsService.create(createPostDto, user);
   }
 
   @Put('/:id')
