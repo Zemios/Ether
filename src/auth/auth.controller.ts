@@ -6,7 +6,7 @@ import { AuthGuard } from './guards/auth.guard';
 import { RequestWithUser } from './interfaces/request-with-user.interface';
 import { NeedRole } from './decorators/need-role.decorator';
 import { RoleGuard } from './guards/role.guard';
-import { Role } from './enums/role.enum';
+import { Role } from '../common/enums/role.enum';
 import { Auth } from './decorators/auth.decorator';
 
 @Controller('auth')

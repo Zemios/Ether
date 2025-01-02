@@ -5,12 +5,7 @@ import { News } from 'src/news/entities/news.entity';
 import { Post } from 'src/posts/entities/post.entity';
 import { UserProgress } from 'src/users/users-progress/entities/user-progress.entity';
 import { UserProject } from 'src/users/users-projects/entities/user-project.entity';
-
-export enum UserRole {
-  ADMIN = 'admin',
-  MODERATOR = 'moderator',
-  USER = 'user',
-}
+import { Role } from 'src/common/enums/role.enum';
 
 @Entity()
 export class User {
@@ -30,8 +25,8 @@ export class User {
   @Column({ type: 'varchar', length: 280, nullable: true })
   about_me: string;
 
-  @Column({ type: 'enum', enum: UserRole, default: UserRole.USER })
-  role: UserRole;
+  @Column({ type: 'enum', enum: Role, default: Role.USER })
+  role: Role;
 
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   registration_date: Date;
