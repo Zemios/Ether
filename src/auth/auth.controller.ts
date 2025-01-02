@@ -7,6 +7,7 @@ import { RequestWithUser } from './interfaces/request-with-user.interface';
 import { NeedRole } from './decorators/need-role.decorator';
 import { RoleGuard } from './guards/role.guard';
 import { Role } from './enums/role.enum';
+import { Auth } from './decorators/auth.decorator';
 
 @Controller('auth')
 export class AuthController {
@@ -24,8 +25,7 @@ export class AuthController {
     }
 
     @Get('profile')
-    @NeedRole(Role.USER)
-    @UseGuards(AuthGuard, RoleGuard)
+    @Auth(Role.USER)
     profile(@Request() req: RequestWithUser) {
         return this.authService.profile(req.user);
     }
