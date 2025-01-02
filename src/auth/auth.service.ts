@@ -34,4 +34,8 @@ export class AuthService {
 
         throw new UnauthorizedException('Invalid credentials');
     }
+
+    async profile({ email, role }: { email: string; role: string }) {
+        return await this.userService.findOneByEmail(email)
+    }
 }
