@@ -23,6 +23,13 @@ export class UsersService {
     return this.usersRepository.findOneBy({ email });
   }
 
+  findOneByEmailByPassword(email: string) {
+    return this.usersRepository.findOne({
+      where: { email },
+      select: ['id', 'name', 'email', 'password', 'role']
+    });
+  }
+
   async create(user: CreateUserDto): Promise<User> {
     const newUser = this.usersRepository.create(user);
     return this.usersRepository.save(newUser);

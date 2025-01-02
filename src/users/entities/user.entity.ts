@@ -24,7 +24,7 @@ export class User {
   email: string;
 
   /* TODO: add hashing for password */
-  @Column({ type: 'varchar', length: 255 })
+  @Column({ type: 'varchar', length: 255, select: false })
   password: string;
 
   @Column({ type: 'varchar', length: 280, nullable: true })
