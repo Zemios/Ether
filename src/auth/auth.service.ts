@@ -20,7 +20,7 @@ export class AuthService {
 
         await this.userService.create({ name, email, password: await hash(password, 10) });
 
-        return { name, email }
+        return { name, email } //TODO: a lo mejor seria mas optimo devolver el token directamente
     }
 
     async login({ email, password }: LoginDto) {
