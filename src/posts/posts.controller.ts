@@ -28,11 +28,13 @@ export class PostsController {
   }
 
   @Put('/:id')
+  @Auth(Role.USER)
   update(@Param('id') id: string, @Body() updatePostDto: CreatePostDto): Promise<PostEntity> {
     return this.postsService.update(parseInt(id), updatePostDto);
   }
 
   @Delete('/:id')
+  @Auth(Role.USER)
   remove(@Param('id') id: string) {
     return this.postsService.remove(parseInt(id));
   }
