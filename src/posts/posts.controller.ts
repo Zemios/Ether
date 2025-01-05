@@ -35,7 +35,7 @@ export class PostsController {
 
   @Delete('/:id')
   @Auth(Role.USER)
-  remove(@Param('id') id: string) {
-    return this.postsService.remove(parseInt(id));
+  remove(@Param('id') id: string, @ActiveUser() user: UserActiveInterface) {
+    return this.postsService.remove(parseInt(id), user);
   }
 }

@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Post } from './entities/post.entity';
@@ -23,7 +23,14 @@ export class PostsService {
     });
   }
 
-  async remove(id: number): Promise<void> {
+  async remove(id: number, user: UserActiveInterface): Promise<void> {
+    const post = await this.postRepository.findOne({ where: { id } });
+    if (!post) {
+      throw new NotFoundException('Post not found');
+    }
+    if (post.user_id !== user.id) {
+      throw new UnauthorizedException('You can only delete your own posts');
+    }
     await this.postRepository.delete(id);
   }
 

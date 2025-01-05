@@ -5,10 +5,6 @@ export class CreatePostDto {
   user_id?: number;
 
   @IsString()
-  @MaxLength(255)
-  title: string;
-
-  @IsString()
   @MaxLength(1000)
   content: string;
 }

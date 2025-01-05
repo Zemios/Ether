@@ -15,9 +15,6 @@ export class Post {
   @JoinColumn({ name: 'user_id' })
   user: User;
 
-  @Column({ type: 'varchar', length: 100 })
-  title: string;
-
   @Column({ type: 'varchar', length: 560 })
   content: string;
 
