@@ -1,5 +1,5 @@
 import { UserActiveInterface } from './../common/interfaces/user-active.interface';
-import { Body, Controller, Get, Post, Request, Res, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Post, Req, Res, UseGuards } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { RegisterDto } from './dto/register.dto';
 import { LoginDto } from './dto/login.dto';
@@ -7,6 +7,7 @@ import { Role } from '../common/enums/role.enum';
 import { Auth } from './decorators/auth.decorator';
 import { ActiveUser } from 'src/common/decorators/active-user.decorator';
 import { Response } from 'express';
+import { AuthGuard } from './guards/auth.guard';
 
 @Controller('auth')
 export class AuthController {
@@ -29,16 +30,22 @@ export class AuthController {
 
     @Post('login')
     async login(@Body() loginDto: LoginDto, @Res({ passthrough: true }) response: Response) {
-        const jwtToken = await this.authService.login(loginDto);
-
-        response.cookie('authToken', jwtToken, {
+        const { token } = await this.authService.login(loginDto);
+        response.cookie('authToken', token, {
             httpOnly: true,
             secure: true,
             sameSite: 'strict',
             maxAge: 24 * 60 * 60 * 1000,
         });
 
-        return { message: 'Login exitoso' };
+        return { token };
+    }
+
+    @UseGuards(AuthGuard)
+    @Get('check')
+    checkAuth(@Req() req) {
+        console.log(req.user);
+        return { isAuthenticated: true, user: req.user };
     }
 
     @Get('profile')
