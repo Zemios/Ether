@@ -35,7 +35,6 @@ export class PostsService {
   }
 
   create(createPostDto: CreatePostDto, user: UserActiveInterface): Promise<Post> {
-    console.log(user)
     return this.postRepository.save({
       ...createPostDto,
       user_id: user.id,

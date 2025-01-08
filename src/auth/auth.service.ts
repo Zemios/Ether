@@ -4,7 +4,7 @@ import { RegisterDto } from './dto/register.dto';
 import { hash, compare } from 'bcryptjs';
 import { LoginDto } from './dto/login.dto';
 import { JwtService } from '@nestjs/jwt';
-import { Request, Response } from 'express';
+import { Response } from 'express';
 
 @Injectable()
 export class AuthService {
