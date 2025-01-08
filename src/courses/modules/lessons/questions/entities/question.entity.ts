@@ -10,13 +10,13 @@ export class Question {
     @Column('int')
     lesson_id: number;
 
-    @ManyToOne(() => Lesson, (lesson) => lesson.questions)
+    @ManyToOne(() => Lesson, (lesson) => lesson.questions, { onDelete: 'CASCADE' })
     @JoinColumn({ name: 'lesson_id' })
     lesson: Lesson;
 
     @Column('text')
     content: string;
 
-    @OneToMany(() => Answer, (answer) => answer.question)
+    @OneToMany(() => Answer, (answer) => answer.question, { cascade: true })
     answers: Answer[];
 }

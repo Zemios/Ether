@@ -12,28 +12,28 @@ export class UserProgress {
   @Column()
   user_id: number;
 
-  @ManyToOne(() => User, (user) => user.progress)
+  @ManyToOne(() => User, (user) => user.progress, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'user_id' })
   user: User;
 
   @Column({ nullable: true })
   course_id: number;
 
-  @ManyToOne(() => Course, (course) => course.progress)
+  @ManyToOne(() => Course, (course) => course.progress, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'course_id' })
   course: Course;
 
   @Column({ nullable: true })
   module_id: number;
 
-  @ManyToOne(() => Module, (module) => module.progress)
+  @ManyToOne(() => Module, (module) => module.progress, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'module_id' })
   module: Module;
 
   @Column({ nullable: true })
   lesson_id: number;
 
-  @ManyToOne(() => Lesson, (lesson) => lesson.progress)
+  @ManyToOne(() => Lesson, (lesson) => lesson.progress, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'lesson_id' })
   lesson: Lesson;
 

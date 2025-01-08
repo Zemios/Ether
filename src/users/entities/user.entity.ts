@@ -30,21 +30,21 @@ export class User {
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   registration_date: Date;
 
-  @OneToMany(() => Comment, (comment) => comment.user)
+  @OneToMany(() => Comment, (comment) => comment.user, { cascade: true })
   comments: Comment[];
 
-  @OneToMany(() => Post, (post) => post.user)
+  @OneToMany(() => Post, (post) => post.user, { cascade: true })
   posts: Post[];
 
-  @OneToMany(() => UserLike, (like) => like.user)
+  @OneToMany(() => UserLike, (like) => like.user, { cascade: true })
   likes: UserLike[];
 
-  @OneToMany(() => News, (news) => news.author)
+  @OneToMany(() => News, (news) => news.author, { cascade: true })
   news: News[];
 
-  @OneToMany(() => UserProgress, (progress) => progress.user)
+  @OneToMany(() => UserProgress, (progress) => progress.user, { cascade: true })
   progress: UserProgress[];
 
-  @OneToMany(() => UserProject, (project) => project.user)
+  @OneToMany(() => UserProject, (project) => project.user, { cascade: true })
   projects: UserProject[];
 }

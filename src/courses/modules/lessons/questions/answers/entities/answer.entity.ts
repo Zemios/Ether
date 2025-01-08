@@ -9,7 +9,7 @@ export class Answer {
     @Column('int')
     question_id: number;
 
-    @ManyToOne(() => Question, (question) => question.answers)
+    @ManyToOne(() => Question, (question) => question.answers, { onDelete: 'CASCADE' })
     @JoinColumn({ name: 'question_id' })
     question: Question;
 

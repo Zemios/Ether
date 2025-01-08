@@ -30,9 +30,9 @@ export class Course {
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   creation_date: Date;
 
-  @OneToMany(() => Module, (module) => module.course)
+  @OneToMany(() => Module, (module) => module.course, { cascade: true })
   modules: Module[];
 
-  @OneToMany(() => UserProgress, (progress) => progress.course)
+  @OneToMany(() => UserProgress, (progress) => progress.course, { cascade: true })
   progress: UserProgress[];
 }

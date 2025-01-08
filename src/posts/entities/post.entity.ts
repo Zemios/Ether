@@ -11,7 +11,7 @@ export class Post {
   @Column('int')
   user_id: number;
 
-  @ManyToOne(() => User, (user) => user.posts)
+  @ManyToOne(() => User, (user) => user.posts, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'user_id' })
   user: User;
 
@@ -21,9 +21,9 @@ export class Post {
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   creation_date: Date;
 
-  @OneToMany(() => Comment, (comment) => comment.post)
+  @OneToMany(() => Comment, (comment) => comment.post, { cascade: true, onDelete: 'CASCADE' })
   comments: Comment[];
 
-  @OneToMany(() => UserLike, (like) => like.post)
+  @OneToMany(() => UserLike, (like) => like.post, { cascade: true, onDelete: 'CASCADE' })
   likes: UserLike[];
 }

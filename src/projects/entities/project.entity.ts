@@ -33,6 +33,6 @@ export class Project {
   @Column({ type: 'varchar', length: 280, nullable: true })
   subtitle: string;
 
-  @OneToMany(() => UserProject, (user) => user.project)
+  @OneToMany(() => UserProject, (user) => user.project, { cascade: true })
   users: UserProject[];
 }

@@ -25,10 +25,10 @@ export class News {
   @Column({ nullable: true })
   author_id: number;
 
-  @ManyToOne(() => User, (user) => user.news)
+  @ManyToOne(() => User, (user) => user.news, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'author_id' })
   author: User;
 
-  @OneToMany(() => UserLike, (like) => like.news)
+  @OneToMany(() => UserLike, (like) => like.news, { cascade: true })
   likes: UserLike[];
 }

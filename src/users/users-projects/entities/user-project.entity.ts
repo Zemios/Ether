@@ -10,14 +10,14 @@ export class UserProject {
   @Column({ nullable: true })
   user_id: number;
 
-  @ManyToOne(() => User, (user) => user.projects)
+  @ManyToOne(() => User, (user) => user.projects, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'user_id' })
   user: User;
 
   @Column({ nullable: true })
   project_id: number;
 
-  @ManyToOne(() => Project, (project) => project.users)
+  @ManyToOne(() => Project, (project) => project.users, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'project_id' })
   project: Project;
 

@@ -11,21 +11,21 @@ export class UserLike {
   @Column({ nullable: true })
   user_id: number;
 
-  @ManyToOne(() => User, (user) => user.likes)
+  @ManyToOne(() => User, (user) => user.likes, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'user_id' })
   user: User;
 
   @Column({ nullable: true })
   post_id: number;
 
-  @ManyToOne(() => Post, (post) => post.likes)
+  @ManyToOne(() => Post, (post) => post.likes, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'post_id' })
   post: Post;
 
   @Column({ nullable: true })
   news_id: number;
 
-  @ManyToOne(() => News, (news) => news.likes)
+  @ManyToOne(() => News, (news) => news.likes, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'news_id' })
   news: News;
 }

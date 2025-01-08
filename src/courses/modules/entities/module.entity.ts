@@ -11,7 +11,7 @@ export class Module {
   @Column({ nullable: true })
   course_id: number;
 
-  @ManyToOne(() => Course, (course) => course.modules)
+  @ManyToOne(() => Course, (course) => course.modules, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'course_id' })
   course: Course;
 
@@ -21,9 +21,9 @@ export class Module {
   @Column({ type: 'varchar', length: 280, nullable: true })
   description: string;
 
-  @OneToMany(() => Lesson, (lesson) => lesson.module)
+  @OneToMany(() => Lesson, (lesson) => lesson.module, { cascade: true })
   lessons: Lesson[];
 
-  @OneToMany(() => UserProgress, (progress) => progress.module)
+  @OneToMany(() => UserProgress, (progress) => progress.module, { cascade: true })
   progress: UserProgress[];
 }
