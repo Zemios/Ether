@@ -4,7 +4,7 @@ import { RegisterDto } from './dto/register.dto';
 import { hash, compare } from 'bcryptjs';
 import { LoginDto } from './dto/login.dto';
 import { JwtService } from '@nestjs/jwt';
-import { Response } from 'express';
+import { Request, Response } from 'express';
 
 @Injectable()
 export class AuthService {
@@ -17,7 +17,7 @@ export class AuthService {
         const payload = { id: user.id, email: user.email, role: user.role };
 
         const accessToken = await this.jwtService.signAsync(payload, {
-            expiresIn: '15m',
+            expiresIn: '24h',
         });
 
         const refreshToken = await this.jwtService.signAsync(payload, {
@@ -48,7 +48,7 @@ export class AuthService {
                 httpOnly: true,
                 secure: true,
                 sameSite: 'strict',
-                maxAge: 15 * 60 * 1000,
+                maxAge: 24 * 60 * 60 * 1000,
             });
 
             res.cookie('refreshToken', refreshToken, {
@@ -63,7 +63,7 @@ export class AuthService {
         }
     }
 
-    async refresh(refreshToken: string): Promise<{ accessToken: string }> {
+    async refresh(refreshToken: string, res: Response): Promise<{ accessToken: string }> {
         try {
             const payload = await this.jwtService.verifyAsync(refreshToken, {
                 secret: process.env.REFRESH_SECRET_KEY,
@@ -71,8 +71,15 @@ export class AuthService {
 
             const newAccessToken = await this.jwtService.signAsync(
                 { id: payload.id, email: payload.email, role: payload.role },
-                { secret: process.env.SECRET_KEY, expiresIn: '15m' },
+                { secret: process.env.SECRET_KEY, expiresIn: '24h' },
             );
+
+            res.cookie('accessToken', newAccessToken, {
+                httpOnly: true,
+                secure: true,
+                sameSite: 'strict',
+                maxAge: 24 * 60 * 60 * 1000,
+            });
 
             return { accessToken: newAccessToken };
         } catch (error) {

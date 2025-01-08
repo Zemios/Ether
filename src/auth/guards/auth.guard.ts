@@ -10,31 +10,47 @@ export class AuthGuard implements CanActivate {
   async canActivate(context: ExecutionContext): Promise<boolean> {
     const request = context.switchToHttp().getRequest<Request>();
 
-    const token = this.extractTokenFromCookie(request) || this.extractTokenFromHeader(request);
+    const accessToken = this.extractTokenFromCookie(request, 'accessToken') || this.extractTokenFromHeader(request, 'accessToken');
+    const refreshToken = this.extractTokenFromCookie(request, 'refreshToken') || this.extractTokenFromHeader(request, 'refreshToken');
 
-    if (!token) {
-      throw new UnauthorizedException('Token not found');
+    if (!accessToken && !refreshToken) {
+      throw new UnauthorizedException('No tokens found');
     }
 
     try {
-      const payload = await this.jwtService.verifyAsync(
-        token,
-        { secret: process.env.SECRET_KEY },
-      );
-      request['user'] = payload;
-    } catch {
+      const payload = accessToken ? await this.verifyToken(accessToken, 'accessToken') : null;
+
+      if (!payload && refreshToken) {
+        await this.verifyToken(refreshToken, 'refreshToken');
+      }
+
+      if (payload) {
+        request['user'] = payload;
+      }
+
+    } catch (error) {
       throw new UnauthorizedException('Invalid token');
     }
 
     return true;
   }
 
-  private extractTokenFromHeader(request: Request): string | undefined {
+  private extractTokenFromHeader(request: Request, tokenType: string): string | undefined {
     const [type, token] = request.headers.authorization?.split(' ') ?? [];
-    return type === 'Bearer' ? token : undefined;
+    return type === 'Bearer' && tokenType === 'accessToken' ? token : undefined;
   }
 
-  private extractTokenFromCookie(request: Request): string | undefined {
-    return request.cookies['authToken'];
+  private extractTokenFromCookie(request: Request, tokenType: string): string | undefined {
+    return request.cookies[tokenType];
+  }
+
+  private async verifyToken(token: string, tokenType: string): Promise<any> {
+    const secretKey = tokenType === 'accessToken' ? process.env.SECRET_KEY : process.env.REFRESH_SECRET_KEY;
+
+    try {
+      return await this.jwtService.verifyAsync(token, { secret: secretKey });
+    } catch (error) {
+      throw new UnauthorizedException(`Invalid ${tokenType}`);
+    }
   }
 }

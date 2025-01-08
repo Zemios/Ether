@@ -6,7 +6,7 @@ import { LoginDto } from './dto/login.dto';
 import { Role } from '../common/enums/role.enum';
 import { Auth } from './decorators/auth.decorator';
 import { ActiveUser } from 'src/common/decorators/active-user.decorator';
-import { Response } from 'express';
+import { Request, Response } from 'express';
 import { AuthGuard } from './guards/auth.guard';
 
 @Controller('auth')
@@ -27,7 +27,10 @@ export class AuthController {
     @UseGuards(AuthGuard)
     @Get('check')
     checkAuth(@Req() req) {
-        return { isAuthenticated: true, user: req.user };
+        if (req.user) {
+            return { isAuthenticated: true, user: req.user };
+        }
+        return { isAuthenticated: false };
     }
 
     @Get('profile')
@@ -35,18 +38,24 @@ export class AuthController {
     profile(@ActiveUser() user: UserActiveInterface) {
         return this.authService.profile(user);
     }
+
     @Post('refresh')
-    async refreshToken(@Body('refreshToken') refreshToken: string) {
+    async refreshToken(@Req() req, @Res({ passthrough: true }) response: Response) {
+        const refreshToken = req.cookies['refreshToken'];
+
         if (!refreshToken) {
             throw new UnauthorizedException('Refresh token is required');
         }
 
-        return await this.authService.refresh(refreshToken);
+        return await this.authService.refresh(refreshToken, response);
     }
 
+
+    @UseGuards(AuthGuard)
     @Post('logout')
     logout(@Res({ passthrough: true }) response: Response) {
-        response.clearCookie('authToken');
+        response.clearCookie('accessToken');
+        response.clearCookie('refreshToken');
         return { message: 'Logout exitoso' };
     }
 }
