@@ -21,9 +21,9 @@ export class Post {
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   creation_date: Date;
 
-  @OneToMany(() => Comment, (comment) => comment.post, { cascade: true, onDelete: 'CASCADE' })
+  @OneToMany(() => Comment, (comment) => comment.post, { cascade: true })
   comments: Comment[];
 
-  @OneToMany(() => UserLike, (like) => like.post, { cascade: true, onDelete: 'CASCADE' })
+  @OneToMany(() => UserLike, (like) => like.post, { cascade: true })
   likes: UserLike[];
 }
