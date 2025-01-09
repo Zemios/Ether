@@ -1,9 +1,10 @@
-import { Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Post } from './entities/post.entity';
 import { CreatePostDto } from './dto/create-post.dto';
 import { UserActiveInterface } from 'src/common/interfaces/user-active.interface';
+import { PostDto } from './dto/post.dto';
 
 @Injectable()
 export class PostsService {
@@ -12,21 +13,52 @@ export class PostsService {
     private postRepository: Repository<Post>,
   ) { }
 
-  findAll(page: number = 1, limit: number = 10): Promise<Post[]> {
-    const skip = (page - 1) * limit;
-    return this.postRepository.find({
+  async findAll(page: number | string = 1, limit: number | string = 10): Promise<PostDto[]> {
+    limit = Number(limit)
+    const skip = (Number(page) - 1) * Number(limit);
+    if (isNaN(skip) || isNaN(limit)) {
+      throw new BadRequestException('Invalid page or limit');
+    }
+    const posts = await this.postRepository.find({
       relations: ['user', 'comments', 'likes'],
       order: { 'creation_date': 'DESC' },
       take: limit,
       skip,
     });
+    return posts.map(post => ({
+      id: post.id,
+      content: post.content,
+      creation_date: post.creation_date,
+      user: {
+        id: post.user.id,
+        name: post.user.name,
+      },
+      comments: post.comments,
+      likes: post.likes,
+    }));
   }
 
-  findOne(id: number): Promise<Post | null> {
-    return this.postRepository.findOne({
+  async findOne(id: number): Promise<PostDto | null> {
+    const post = await this.postRepository.findOne({
       where: { id },
       relations: ['user', 'comments', 'likes'],
     });
+
+    if (!post) {
+      throw new NotFoundException('Post not found');
+    }
+
+    return {
+      id: post.id,
+      content: post.content,
+      creation_date: post.creation_date,
+      user: {
+        id: post.user.id,
+        name: post.user.name,
+      },
+      comments: post.comments,
+      likes: post.likes,
+    };
   }
 
   async remove(id: number, user: UserActiveInterface): Promise<void> {

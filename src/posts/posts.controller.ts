@@ -12,7 +12,7 @@ export class PostsController {
   constructor(private postsService: PostsService) { }
 
   @Get()
-  findAll(@Query('page') page: number, @Query('limit') limit: number) {
+  findAll(@Query('page') page: number | string = 1, @Query('limit') limit: number | string = 10) {
     return this.postsService.findAll(page, limit);
   }
 
