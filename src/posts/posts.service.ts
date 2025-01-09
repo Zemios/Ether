@@ -12,8 +12,14 @@ export class PostsService {
     private postRepository: Repository<Post>,
   ) { }
 
-  findAll(): Promise<Post[]> {
-    return this.postRepository.find({ relations: ['user', 'comments', 'likes'] });
+  findAll(page: number = 1, limit: number = 10): Promise<Post[]> {
+    const skip = (page - 1) * limit;
+    return this.postRepository.find({
+      relations: ['user', 'comments', 'likes'],
+      order: { 'creation_date': 'DESC' },
+      take: limit,
+      skip,
+    });
   }
 
   findOne(id: number): Promise<Post | null> {

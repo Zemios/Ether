@@ -1,5 +1,5 @@
 import { PostsService } from './posts.service';
-import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, Query } from '@nestjs/common';
 import { CreatePostDto } from './dto/create-post.dto';
 import { Post as PostEntity } from './entities/post.entity';
 import { ActiveUser } from 'src/common/decorators/active-user.decorator';
@@ -12,8 +12,8 @@ export class PostsController {
   constructor(private postsService: PostsService) { }
 
   @Get()
-  findAll() {
-    return this.postsService.findAll();
+  findAll(@Query('page') page: number, @Query('limit') limit: number) {
+    return this.postsService.findAll(page, limit);
   }
 
   @Get('/:id')
