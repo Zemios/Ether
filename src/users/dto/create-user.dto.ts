@@ -6,6 +6,16 @@ export class CreateUserDto {
   @MaxLength(255)
   name: string;
 
+  @IsOptional()
+  @IsString()
+  @MaxLength(255)
+  title?: string;
+
+  @IsOptional()
+  @IsString()
+  @MaxLength(255)
+  profile_picture?: string;
+
   @IsEmail()
   @MaxLength(255)
   email: string;

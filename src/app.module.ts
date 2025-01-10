@@ -14,26 +14,18 @@ import { PostsModule } from './posts/posts.module';
 import { ProjectsModule } from './projects/projects.module';
 import { UsersProgressModule } from './users/users-progress/users-progress.module';
 import { UsersProjectsModule } from './users/users-projects/users-projects.module';
-import { User } from './users/entities/user.entity';
-import { Comment } from './posts/comments/entities/comment.entity';
-import { Course } from './courses/entities/course.entity';
-import { Lesson } from './courses/modules/lessons/entities/lesson.entity';
-import { UserLike } from './users/users-likes/entities/user-like.entity';
-import { Module as ModuleEntity } from './courses/modules/entities/module.entity';
-import { News } from './news/entities/news.entity';
-import { Post } from './posts/entities/post.entity';
-import { Project } from './projects/entities/project.entity';
-import { UserProgress } from './users/users-progress/entities/user-progress.entity';
-import { UserProject } from './users/users-projects/entities/user-project.entity';
 import { QuestionsModule } from './courses/modules/lessons/questions/questions.module';
 import { AnswersModule } from './courses/modules/lessons/questions/answers/answers.module';
-import { Question } from './courses/modules/lessons/questions/entities/question.entity';
-import { Answer } from './courses/modules/lessons/questions/answers/entities/answer.entity';
 import { AuthModule } from './auth/auth.module';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 
 
 @Module({
   imports: [
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'uploads'),
+    }),
     ConfigModule.forRoot(),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],

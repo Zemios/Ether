@@ -2,21 +2,40 @@ import { Auth } from 'src/auth/decorators/auth.decorator';
 import { CreateUserDto } from './dto/create-user.dto';
 import { User } from './entities/user.entity';
 import { UsersService } from './users.service';
-import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { Role } from 'src/common/enums/role.enum';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { diskStorage } from 'multer';
+import { extname } from 'path';
 
 @Controller('users')
 export class UsersController {
   constructor(private usersService: UsersService) { }
 
+  @Post('upload')
+  @UseInterceptors(FileInterceptor('file', {
+    storage: diskStorage({
+      destination: './uploads/profile-pics',
+      filename: (req, file, callback) => {
+        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+        const ext = extname(file.originalname);
+        const filename = `${file.fieldname}-${uniqueSuffix}${ext}`;
+        callback(null, filename);
+      },
+    }),
+  }))
+  uploadProfileImage(@UploadedFile() file: Express.Multer.File) {
+    return { filename: file.filename };
+  }
+
   @Get()
   findAll() {
-    return this.usersService.findAll(); // TODO: Proteger ruta (SOLO ADMIN(?) o que al menos no devuelva las contraseñas ni las id??)
+    return this.usersService.findAll();
   }
 
   @Get('/:id')
   findOne(@Param('id') id: string) {
-    return this.usersService.findOne(parseInt(id)); // TODO: Proteger ruta (SOLO ADMIN(?)) o que no de contraseña por lo menos
+    return this.usersService.findOne(parseInt(id));
   }
 
   @Post()
