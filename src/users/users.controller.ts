@@ -2,12 +2,13 @@ import { Auth } from 'src/auth/decorators/auth.decorator';
 import { CreateUserDto } from './dto/create-user.dto';
 import { User } from './entities/user.entity';
 import { UsersService } from './users.service';
-import { Body, Controller, Delete, Get, Param, Post, Put, UploadedFile, UseInterceptors } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Delete, Get, Param, Post, Put, UnauthorizedException, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { Role } from 'src/common/enums/role.enum';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { extname } from 'path';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { unlinkSync } from 'fs';
 
 @Controller('users')
 export class UsersController {
@@ -25,8 +26,22 @@ export class UsersController {
       },
     }),
   }))
-  uploadProfileImage(@UploadedFile() file: Express.Multer.File) {
-    return { filename: file.filename };
+  async uploadProfileImage(@Param('id') id: string, @UploadedFile() file: Express.Multer.File) {
+    const user = await this.usersService.findOne(parseInt(id));
+
+    if (user.profile_picture) {
+      const oldImagePath = `./uploads/profile-pics/${user.profile_picture.split('/').pop()}`;
+      try {
+        unlinkSync(oldImagePath);
+      } catch (err) {
+        console.error('Error al eliminar la imagen antigua:', err);
+      }
+    }
+
+    user.profile_picture = file.filename;
+    await this.usersService.update(parseInt(id), user);
+
+    return { url: user.profile_picture };
   }
 
   @Get()
@@ -47,12 +62,15 @@ export class UsersController {
   @Auth(Role.USER)
   @Put('/:id')
   update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto): Promise<User> {
-    return this.usersService.update(parseInt(id), updateUserDto); // TODO: Proteger ruta (SOLO EL MISMO USUARIO SE PUEDE ACTUALIZAR A SI MISMO, O UN ADMIN)
+    if (updateUserDto.about_me || updateUserDto.name || updateUserDto.profile_picture || updateUserDto.title) {
+      return this.usersService.update(parseInt(id), updateUserDto);
+    }
+    throw new BadRequestException('Blank Request')
   }
 
   @Auth(Role.USER)
   @Delete('/:id')
   remove(@Param('id') id: string) {
-    return this.usersService.remove(parseInt(id)); // TODO: Proteger ruta (SOLO ADMIN(?) O EL PROPIO USUARIO)
+    return this.usersService.remove(parseInt(id));
   }
 }

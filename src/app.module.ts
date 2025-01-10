@@ -24,7 +24,8 @@ import { join } from 'path';
 @Module({
   imports: [
     ServeStaticModule.forRoot({
-      rootPath: join(__dirname, '..', 'uploads'),
+      rootPath: join(__dirname, '..', 'uploads/profile-pics'),
+      serveRoot: '/profile-pics'
     }),
     ConfigModule.forRoot(),
     TypeOrmModule.forRootAsync({
