@@ -2,7 +2,7 @@ import { Auth } from 'src/auth/decorators/auth.decorator';
 import { CreateUserDto } from './dto/create-user.dto';
 import { User } from './entities/user.entity';
 import { UsersService } from './users.service';
-import { BadRequestException, Body, Controller, Delete, Get, Param, Post, Put, UnauthorizedException, UploadedFile, UseInterceptors } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Delete, Get, Param, Post, Put, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { Role } from 'src/common/enums/role.enum';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
@@ -13,36 +13,6 @@ import { unlinkSync } from 'fs';
 @Controller('users')
 export class UsersController {
   constructor(private usersService: UsersService) { }
-
-  @Post('upload')
-  @UseInterceptors(FileInterceptor('file', {
-    storage: diskStorage({
-      destination: './uploads/profile-pics',
-      filename: (req, file, callback) => {
-        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-        const ext = extname(file.originalname);
-        const filename = `${file.fieldname}-${uniqueSuffix}${ext}`;
-        callback(null, filename);
-      },
-    }),
-  }))
-  async uploadProfileImage(@Param('id') id: string, @UploadedFile() file: Express.Multer.File) {
-    const user = await this.usersService.findOne(parseInt(id));
-
-    if (user.profile_picture) {
-      const oldImagePath = `./uploads/profile-pics/${user.profile_picture.split('/').pop()}`;
-      try {
-        unlinkSync(oldImagePath);
-      } catch (err) {
-        console.error('Error al eliminar la imagen antigua:', err);
-      }
-    }
-
-    user.profile_picture = file.filename;
-    await this.usersService.update(parseInt(id), user);
-
-    return { url: user.profile_picture };
-  }
 
   @Get()
   findAll() {
@@ -61,11 +31,37 @@ export class UsersController {
 
   @Auth(Role.USER)
   @Put('/:id')
-  update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto): Promise<User> {
+  @UseInterceptors(FileInterceptor('profile_picture', {
+    storage: diskStorage({
+      destination: './uploads/profile-pics',
+      filename: (req, file, callback) => {
+        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+        const ext = extname(file.originalname);
+        const filename = `${file.fieldname}-${uniqueSuffix}${ext}`;
+        callback(null, filename);
+      },
+    }),
+  }))
+  async update(@Param('id') id: string, @UploadedFile() file: Express.Multer.File, @Body() updateUserDto: UpdateUserDto): Promise<User> {
+    const user = await this.usersService.findOne(parseInt(id));
+
+    if (file) {
+      if (user.profile_picture) {
+        const oldImagePath = `./uploads/profile-pics/${user.profile_picture.split('/').pop()}`;
+        try {
+          unlinkSync(oldImagePath);
+        } catch (err) {
+          console.error('Error al eliminar la imagen antigua:', err);
+        }
+      }
+      updateUserDto.profile_picture = file.filename;
+    }
+
     if (updateUserDto.about_me || updateUserDto.name || updateUserDto.profile_picture || updateUserDto.title) {
       return this.usersService.update(parseInt(id), updateUserDto);
     }
-    throw new BadRequestException('Blank Request')
+
+    throw new BadRequestException('Blank Request');
   }
 
   @Auth(Role.USER)
