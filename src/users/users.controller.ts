@@ -7,6 +7,7 @@ import { Role } from 'src/common/enums/role.enum';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { extname } from 'path';
+import { UpdateUserDto } from './dto/update-user.dto';
 
 @Controller('users')
 export class UsersController {
@@ -45,7 +46,7 @@ export class UsersController {
 
   @Auth(Role.USER)
   @Put('/:id')
-  update(@Param('id') id: string, @Body() updateUserDto: CreateUserDto): Promise<User> {
+  update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto): Promise<User> {
     return this.usersService.update(parseInt(id), updateUserDto); // TODO: Proteger ruta (SOLO EL MISMO USUARIO SE PUEDE ACTUALIZAR A SI MISMO, O UN ADMIN)
   }
 
