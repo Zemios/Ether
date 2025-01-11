@@ -1,4 +1,8 @@
 {
+  "printWidth": 200,
+  "importOrder": ["^[a-z]", "^@src/(.*)$", "^[./]"],
+  "importOrderSeparation": false,
+  "singleAttributePerLine": false,
   "singleQuote": true,
   "trailingComma": "all"
 }

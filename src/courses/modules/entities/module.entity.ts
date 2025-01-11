@@ -1,0 +1,29 @@
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Course } from 'src/courses/entities/course.entity';
+import { Lesson } from 'src/courses/modules/lessons/entities/lesson.entity';
+import { UserProgress } from 'src/users/users-progress/entities/user-progress.entity';
+
+@Entity()
+export class Module {
+  @PrimaryGeneratedColumn()
+  id: number;
+
+  @Column({ nullable: true })
+  course_id: number;
+
+  @ManyToOne(() => Course, (course) => course.modules, { onDelete: 'CASCADE' })
+  @JoinColumn({ name: 'course_id' })
+  course: Course;
+
+  @Column({ type: 'varchar', length: 50 })
+  title: string;
+
+  @Column({ type: 'varchar', length: 280, nullable: true })
+  description: string;
+
+  @OneToMany(() => Lesson, (lesson) => lesson.module, { cascade: true })
+  lessons: Lesson[];
+
+  @OneToMany(() => UserProgress, (progress) => progress.module, { cascade: true })
+  progress: UserProgress[];
+}

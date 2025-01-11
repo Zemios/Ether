@@ -3,22 +3,30 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { ApiModule } from './api/api.module';
-import { UserModule } from './api/user/user.module';
-import { CommentModule } from './api/comment/comment.module';
-import { CourseModule } from './api/course/course.module';
-import { LessonModule } from './api/lesson/lesson.module';
-import { UserLikeModule } from './api/like/user-like.module';
-import { ModuleModule } from './api/module/module.module';
-import { NewsModule } from './api/news/news.module';
-import { PostModule } from './api/post/post.module';
-import { ProjectModule } from './api/project/project.module';
-import { ProjectCollaboratorModule } from './api/project-collaborator/project-collaborator.module';
-import { UserProgressModule } from './api/user-progress/user-progress.module';
-import { UserProjectModule } from './api/user-project/user-project.module';
+import { UsersModule } from './users/users.module';
+import { CommentsModule } from './posts/comments/comments.module';
+import { CoursesModule } from './courses/courses.module';
+import { LessonsModule } from './courses/modules/lessons/lessons.module';
+import { UsersLikesModule } from './users/users-likes/users-likes.module';
+import { ModulesModule } from './courses/modules/modules.module';
+import { NewsModule } from './news/news.module';
+import { PostsModule } from './posts/posts.module';
+import { ProjectsModule } from './projects/projects.module';
+import { UsersProgressModule } from './users/users-progress/users-progress.module';
+import { UsersProjectsModule } from './users/users-projects/users-projects.module';
+import { QuestionsModule } from './courses/modules/lessons/questions/questions.module';
+import { AnswersModule } from './courses/modules/lessons/questions/answers/answers.module';
+import { AuthModule } from './auth/auth.module';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
+
 
 @Module({
   imports: [
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'uploads/profile-pics'),
+      serveRoot: '/profile-pics'
+    }),
     ConfigModule.forRoot(),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
@@ -29,24 +37,25 @@ import { UserProjectModule } from './api/user-project/user-project.module';
         username: configService.get<string>('DB_USERNAME'),
         password: configService.get<string>('DB_PASSWORD'),
         database: configService.get<string>('DB_DATABASE'),
-        entities: [__dirname + '/api/**/models/*.entity{.d.ts,.js}'],
+        autoLoadEntities: true,
         synchronize: true,
       }),
       inject: [ConfigService],
     }),
-    ApiModule,
-    UserModule,
-    CommentModule,
-    CourseModule,
-    LessonModule,
-    UserLikeModule,
-    ModuleModule,
+    UsersModule,
+    CommentsModule,
+    CoursesModule,
+    LessonsModule,
+    UsersLikesModule,
+    ModulesModule,
     NewsModule,
-    PostModule,
-    ProjectModule,
-    ProjectCollaboratorModule,
-    UserProgressModule,
-    UserProjectModule,
+    PostsModule,
+    ProjectsModule,
+    UsersProgressModule,
+    UsersProjectsModule,
+    QuestionsModule,
+    AnswersModule,
+    AuthModule
   ],
   controllers: [AppController],
   providers: [AppService],
