@@ -6,7 +6,7 @@ import { BadRequestException, Body, Controller, Delete, Get, Param, Post, Put, U
 import { Role } from 'src/common/enums/role.enum';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
-import { extname } from 'path';
+import { extname, resolve } from 'path';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { unlinkSync } from 'fs';
 import * as sharp from 'sharp';
@@ -55,21 +55,29 @@ export class UsersController {
     const user = await this.usersService.findOne(parseInt(id));
 
     if (file) {
-      const tempPath = `./uploads/profile-pics/compressed-${file.filename}`;
+      const compressedFilename = `compressed-${file.filename}`;
+      const compressedFilePath = resolve(`./uploads/profile-pics/${compressedFilename}`);
 
       await sharp(file.path)
         .resize(64, 64)
-        .toFile(tempPath);
+        .toFile(compressedFilePath);
+
+      try {
+        unlinkSync(file.path);
+      } catch (err) {
+        console.error('Error al eliminar la imagen HD:', err);
+      }
 
       if (user.profile_picture) {
-        const oldImagePath = `./uploads/profile-pics/${user.profile_picture.split('/').pop()}`;
+        const oldImagePath = resolve(`./uploads/profile-pics/${user.profile_picture}`);
         try {
           unlinkSync(oldImagePath);
         } catch (err) {
           console.error('Error al eliminar la imagen antigua:', err);
         }
       }
-      updateUserDto.profile_picture = `compressed-${file.filename}`;
+
+      updateUserDto.profile_picture = compressedFilename;
     }
 
     if (updateUserDto.about_me || updateUserDto.name || updateUserDto.profile_picture || updateUserDto.title) {
