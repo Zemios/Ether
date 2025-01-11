@@ -9,6 +9,7 @@ import { diskStorage } from 'multer';
 import { extname } from 'path';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { unlinkSync } from 'fs';
+import * as sharp from 'sharp';
 
 @Controller('users')
 export class UsersController {
@@ -41,11 +42,25 @@ export class UsersController {
         callback(null, filename);
       },
     }),
+    fileFilter: (req, file, callback) => {
+      const allowedTypes = ['image/jpeg', 'image/png'];
+      if (!allowedTypes.includes(file.mimetype)) {
+        return callback(new BadRequestException('Only images are allowed!'), false);
+      }
+      callback(null, true);
+    },
+    limits: { fileSize: 2 * 1024 * 1024 },
   }))
   async update(@Param('id') id: string, @UploadedFile() file: Express.Multer.File, @Body() updateUserDto: UpdateUserDto): Promise<User> {
     const user = await this.usersService.findOne(parseInt(id));
 
     if (file) {
+      const tempPath = `./uploads/profile-pics/compressed-${file.filename}`;
+
+      await sharp(file.path)
+        .resize(64, 64)
+        .toFile(tempPath);
+
       if (user.profile_picture) {
         const oldImagePath = `./uploads/profile-pics/${user.profile_picture.split('/').pop()}`;
         try {
@@ -54,7 +69,7 @@ export class UsersController {
           console.error('Error al eliminar la imagen antigua:', err);
         }
       }
-      updateUserDto.profile_picture = file.filename;
+      updateUserDto.profile_picture = `compressed-${file.filename}`;
     }
 
     if (updateUserDto.about_me || updateUserDto.name || updateUserDto.profile_picture || updateUserDto.title) {
