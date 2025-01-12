@@ -17,10 +17,12 @@ export class AuthService {
         const payload = { id: user.id, email: user.email, role: user.role };
 
         const accessToken = await this.jwtService.signAsync(payload, {
+            secret: process.env.SECRET_KEY,
             expiresIn: '24h',
         });
 
         const refreshToken = await this.jwtService.signAsync(payload, {
+            secret: process.env.REFRESH_SECRET_KEY,
             expiresIn: '30d',
         });
 
@@ -90,7 +92,7 @@ export class AuthService {
     async refreshTokens(refreshToken: string, res: Response): Promise<void> {
         try {
             const payload = await this.jwtService.verifyAsync(refreshToken, {
-                secret: process.env.SECRET_KEY,
+                secret: process.env.REFRESH_SECRET_KEY,
             });
 
             const user = await this.userService.findOneByEmail(payload.email);

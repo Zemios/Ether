@@ -17,7 +17,16 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
         signOptions: { expiresIn: '24h' }
       }),
       inject: [ConfigService],
-    })
+    }),
+    JwtModule.registerAsync({
+      global: true,
+      imports: [ConfigModule],
+      useFactory: async (configService: ConfigService) => ({
+        secret: configService.get<string>('REFRESH_SECRET_KEY'),
+        signOptions: { expiresIn: '30d' }
+      }),
+      inject: [ConfigService],
+    }),
   ],
   controllers: [AuthController],
   providers: [AuthService],
