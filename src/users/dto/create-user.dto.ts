@@ -3,12 +3,12 @@ import { Role } from 'src/common/enums/role.enum';
 
 export class CreateUserDto {
   @IsString()
-  @MaxLength(255)
+  @MaxLength(20)
   name: string;
 
   @IsOptional()
   @IsString()
-  @MaxLength(255)
+  @MaxLength(50)
   title?: string;
 
   @IsOptional()
@@ -26,11 +26,11 @@ export class CreateUserDto {
 
   @IsOptional()
   @IsString()
-  @MaxLength(500)
+  @MaxLength(280)
   about_me?: string;
 
   @IsOptional()
   @IsString()
-  @MaxLength(100)
+  @MaxLength(50)
   role?: Role;
 }
