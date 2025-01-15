@@ -8,7 +8,7 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { extname, resolve } from 'path';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { unlinkSync } from 'fs';
+import { existsSync, unlinkSync } from 'fs';
 import * as sharp from 'sharp';
 
 @Controller('users')
@@ -62,18 +62,28 @@ export class UsersController {
         .resize(64, 64)
         .toFile(compressedFilePath);
 
-      try {
-        unlinkSync(file.path);
-      } catch (err) {
-        console.error('Error al eliminar la imagen HD:', err);
+      if (existsSync(file.path)) {
+        try {
+          unlinkSync(file.path);
+          console.log(`Archivo ${file.path} eliminado.`);
+        } catch (err) {
+          console.error('Error al eliminar la imagen HD:', err);
+        }
+      } else {
+        console.log(`Archivo ${file.path} no encontrado, no se pudo eliminar.`);
       }
 
       if (user.profile_picture) {
         const oldImagePath = resolve(`./uploads/profile-pics/${user.profile_picture}`);
-        try {
-          unlinkSync(oldImagePath);
-        } catch (err) {
-          console.error('Error al eliminar la imagen antigua:', err);
+        if (existsSync(oldImagePath)) {
+          try {
+            unlinkSync(oldImagePath);
+            console.log(`Imagen antigua ${oldImagePath} eliminada.`);
+          } catch (err) {
+            console.error('Error al eliminar la imagen antigua:', err);
+          }
+        } else {
+          console.log(`Imagen antigua ${oldImagePath} no encontrada, no se pudo eliminar.`);
         }
       }
 
