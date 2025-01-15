@@ -10,6 +10,7 @@ import { extname, resolve } from 'path';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { existsSync, unlinkSync } from 'fs';
 import * as sharp from 'sharp';
+import * as multer from 'multer';
 
 @Controller('users')
 export class UsersController {
@@ -33,15 +34,7 @@ export class UsersController {
   @Auth(Role.USER)
   @Put('/:id')
   @UseInterceptors(FileInterceptor('profile_picture', {
-    storage: diskStorage({
-      destination: './uploads/profile-pics',
-      filename: (req, file, callback) => {
-        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-        const ext = extname(file.originalname);
-        const filename = `${file.fieldname}-${uniqueSuffix}${ext}`;
-        callback(null, filename);
-      },
-    }),
+    storage: multer.memoryStorage(), // Usar buffer en memoria
     fileFilter: (req, file, callback) => {
       const allowedTypes = ['image/jpeg', 'image/png'];
       if (!allowedTypes.includes(file.mimetype)) {
@@ -55,24 +48,16 @@ export class UsersController {
     const user = await this.usersService.findOne(parseInt(id));
 
     if (file) {
-      const compressedFilename = `compressed-${file.filename}`;
+      const compressedFilename = `compressed-${Date.now()}.webp`;
       const compressedFilePath = resolve(`./uploads/profile-pics/${compressedFilename}`);
 
-      await sharp(file.path)
+      // Procesar la imagen desde el buffer
+      await sharp(file.buffer)  // file.buffer se usa aquí
         .resize(64, 64)
+        .webp({ quality: 80 })
         .toFile(compressedFilePath);
 
-      if (existsSync(file.path)) {
-        try {
-          unlinkSync(file.path);
-          console.log(`Archivo ${file.path} eliminado.`);
-        } catch (err) {
-          console.error('Error al eliminar la imagen HD:', err);
-        }
-      } else {
-        console.log(`Archivo ${file.path} no encontrado, no se pudo eliminar.`);
-      }
-
+      // Eliminar la imagen antigua si existe
       if (user.profile_picture) {
         const oldImagePath = resolve(`./uploads/profile-pics/${user.profile_picture}`);
         if (existsSync(oldImagePath)) {
@@ -82,8 +67,6 @@ export class UsersController {
           } catch (err) {
             console.error('Error al eliminar la imagen antigua:', err);
           }
-        } else {
-          console.log(`Imagen antigua ${oldImagePath} no encontrada, no se pudo eliminar.`);
         }
       }
 
