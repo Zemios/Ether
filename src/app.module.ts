@@ -20,12 +20,13 @@ import { AuthModule } from './auth/auth.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 
+console.log(join(__dirname, '..', 'uploads/profile-pics'));
 
 @Module({
   imports: [
     ServeStaticModule.forRoot({
-      rootPath: join(__dirname, '..', 'uploads/profile-pics'),
-      serveRoot: '/profile-pics'
+      rootPath: join(__dirname, '..', '..', 'uploads', 'profile-pics'),
+      serveRoot: '/profile-pics',
     }),
     ConfigModule.forRoot(),
     TypeOrmModule.forRootAsync({
