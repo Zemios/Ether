@@ -8,6 +8,7 @@ export class PostDto {
     user: {
         id: number;
         name: string;
+        profile_picture: string;
     };
     comments: Comment[];
     likes: UserLike[];

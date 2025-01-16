@@ -56,6 +56,7 @@ export class PostsService {
       user: {
         id: post.user.id,
         name: post.user.name,
+        profile_picture: post.user.profile_picture,
       },
       comments: post.comments,
       likes: post.likes,
