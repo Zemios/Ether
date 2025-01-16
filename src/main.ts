@@ -7,7 +7,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.use(cookieParser());
   app.enableCors({
-    origin: [process.env.ORIGIN, 'https:/zemios.com'],
+    origin: [process.env.ORIGIN, 'https://zemios.com'],
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     allowedHeaders: 'Content-Type, Accept, Authorization, X-Requested-With',
     credentials: true,
