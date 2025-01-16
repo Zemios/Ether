@@ -18,7 +18,7 @@ export class User {
   @Column({ type: 'varchar', length: 50, nullable: true })
   title: string;
 
-  @Column({ type: 'varchar', length: 255, nullable: true })
+  @Column({ type: 'varchar', length: 255, nullable: true, default: 'default.svg' })
   profile_picture: string;
 
   @Column({ type: 'varchar', length: 255, unique: true })

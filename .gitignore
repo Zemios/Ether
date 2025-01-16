@@ -57,4 +57,5 @@ report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 
 .vercel
 
-/uploads
+/uploads/profile-pics/*
+!/uploads/profile-pics/default.svg

@@ -57,10 +57,10 @@ export class UsersController {
         .webp({ quality: 80 })
         .toFile(compressedFilePath);
 
-      // Eliminar la imagen antigua si existe
       if (user.profile_picture) {
+
         const oldImagePath = resolve(`./uploads/profile-pics/${user.profile_picture}`);
-        if (existsSync(oldImagePath)) {
+        if (existsSync(oldImagePath) && user.profile_picture !== 'default.svg') {
           try {
             unlinkSync(oldImagePath);
             console.log(`Imagen antigua ${oldImagePath} eliminada.`);
