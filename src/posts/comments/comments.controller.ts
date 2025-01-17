@@ -33,17 +33,17 @@ export class CommentsController {
     return this.commentsService.findOneFromPost(parseInt(postId), parseInt(id));
   }
 
-  @Post()
+  @Post('/comments')
   create(@Body() createCommentDto: CreateCommentDto): Promise<Comment> {
     return this.commentsService.create(createCommentDto);
   }
 
-  @Put('/:id')
+  @Put('/comments/:id')
   update(@Param('id') id: string, @Body() updateCommentDto: CreateCommentDto): Promise<Comment> {
     return this.commentsService.update(parseInt(id), updateCommentDto);
   }
 
-  @Delete('/:id')
+  @Delete('/comments/:id')
   remove(@Param('id') id: string) {
     return this.commentsService.remove(parseInt(id));
   }
