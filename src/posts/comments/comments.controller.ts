@@ -1,20 +1,36 @@
 import { CommentsService } from './comments.service';
-import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, Query } from '@nestjs/common';
 import { CreateCommentDto } from './dto/create-comment.dto';
 import { Comment } from './entities/comment.entity';
 
-@Controller('comments')
+@Controller('')
 export class CommentsController {
   constructor(private commentsService: CommentsService) { }
 
-  @Get()
+  @Get('/comments')
   findAll() {
     return this.commentsService.findAll();
   }
 
-  @Get('/:id')
+  @Get('/comments/:id')
   findOne(@Param('id') id: string) {
     return this.commentsService.findOne(parseInt(id));
+  }
+  @Get('/posts/:postId/comments')
+  async findAllFromPost(
+    @Param('postId') postId: string,
+    @Query('page') page: number = 1,
+    @Query('limit') limit: number = 5
+  ) {
+    return this.commentsService.findAllFromPost(parseInt(postId), page, limit);
+  }
+
+  @Get('/posts/:postId/comments/:id')
+  findOneFromPost(
+    @Param('postId') postId: string,
+    @Param('id') id: string
+  ) {
+    return this.commentsService.findOneFromPost(parseInt(postId), parseInt(id));
   }
 
   @Post()

@@ -21,6 +21,21 @@ export class CommentsService {
       relations: ['post', 'user'],
     });
   }
+  async findAllFromPost(postId: number, page: number, limit: number) {
+    return this.commentRepository.find({
+      where: { post: { id: postId } },
+      skip: (page - 1) * limit,
+      take: limit,
+      relations: ['user'],
+    });
+  }
+
+  async findOneFromPost(postId: number, id: number) {
+    return this.commentRepository.find({
+      where: { post: { id: postId }, id: id },
+      relations: ['user'],
+    });
+  }
 
   async remove(id: number): Promise<void> {
     await this.commentRepository.delete(id);
