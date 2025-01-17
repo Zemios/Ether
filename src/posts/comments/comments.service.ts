@@ -24,6 +24,7 @@ export class CommentsService {
   async findAllFromPost(postId: number, page: number, limit: number) {
     return this.commentRepository.find({
       where: { post: { id: postId } },
+      order: { creation_date: "DESC" },
       skip: (page - 1) * limit,
       take: limit,
       relations: ['user'],
