@@ -2,6 +2,10 @@ import { CommentsService } from './comments.service';
 import { Body, Controller, Delete, Get, Param, Post, Put, Query } from '@nestjs/common';
 import { CreateCommentDto } from './dto/create-comment.dto';
 import { Comment } from './entities/comment.entity';
+import { ActiveUser } from 'src/common/decorators/active-user.decorator';
+import { UserActiveInterface } from 'src/common/interfaces/user-active.interface';
+import { Auth } from 'src/auth/decorators/auth.decorator';
+import { Role } from 'src/common/enums/role.enum';
 
 @Controller('')
 export class CommentsController {
@@ -34,16 +38,19 @@ export class CommentsController {
   }
 
   @Post('/comments')
-  create(@Body() createCommentDto: CreateCommentDto): Promise<Comment> {
-    return this.commentsService.create(createCommentDto);
+  @Auth(Role.USER)
+  create(@Body() createCommentDto: CreateCommentDto, @ActiveUser() user: UserActiveInterface): Promise<Comment> {
+    return this.commentsService.create(createCommentDto, user);
   }
 
   @Put('/comments/:id')
+  @Auth(Role.USER)
   update(@Param('id') id: string, @Body() updateCommentDto: CreateCommentDto): Promise<Comment> {
     return this.commentsService.update(parseInt(id), updateCommentDto);
   }
 
   @Delete('/comments/:id')
+  @Auth(Role.USER)
   remove(@Param('id') id: string) {
     return this.commentsService.remove(parseInt(id));
   }
