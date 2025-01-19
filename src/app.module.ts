@@ -19,6 +19,8 @@ import { AnswersModule } from './courses/modules/lessons/questions/answers/answe
 import { AuthModule } from './auth/auth.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
+import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
+import { APP_GUARD } from '@nestjs/core';
 
 console.log(join(__dirname, '..', 'uploads/profile-pics'));
 
@@ -28,6 +30,10 @@ console.log(join(__dirname, '..', 'uploads/profile-pics'));
       rootPath: join(__dirname, '..', '..', 'uploads', 'profile-pics'),
       serveRoot: '/profile-pics',
     }),
+    ThrottlerModule.forRoot([{
+      ttl: 5000,
+      limit: 20,
+    }]),
     ConfigModule.forRoot(),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
@@ -59,6 +65,9 @@ console.log(join(__dirname, '..', 'uploads/profile-pics'));
     AuthModule
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, {
+    provide: APP_GUARD,
+    useClass: ThrottlerGuard
+  }],
 })
 export class AppModule { }
