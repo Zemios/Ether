@@ -21,6 +21,11 @@ export class PostsController {
     return this.postsService.findOne(parseInt(id));
   }
 
+  @Get('/user/:user_id')
+  findAllByUser(@Param('user_id') user_id: string, @Query('page') page: number | string = 1, @Query('limit') limit: number | string = 10) {
+    return this.postsService.findAllByUser(parseInt(user_id), page, limit);
+  }
+
   @Post()
   @Auth(Role.USER)
   create(@Body() createPostDto: CreatePostDto, @ActiveUser() user: UserActiveInterface): Promise<PostEntity> {

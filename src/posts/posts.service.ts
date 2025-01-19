@@ -63,6 +63,37 @@ export class PostsService {
     };
   }
 
+  async findAllByUser(userId: number, page: number | string = 1, limit: number | string = 10): Promise<PostDto[]> {
+    limit = Number(limit);
+    const skip = (Number(page) - 1) * Number(limit);
+
+    if (isNaN(skip) || isNaN(limit)) {
+      throw new BadRequestException('Invalid page or limit');
+    }
+
+    const posts = await this.postRepository.find({
+      where: { user: { id: userId } },
+      relations: ['user', 'comments', 'likes'],
+      order: { creation_date: 'DESC' },
+      take: limit,
+      skip,
+    });
+
+    return posts.map(post => ({
+      id: post.id,
+      content: post.content,
+      creation_date: post.creation_date,
+      user: {
+        id: post.user.id,
+        name: post.user.name,
+        profile_picture: post.user.profile_picture,
+      },
+      comments: post.comments,
+      likes: post.likes,
+    }));
+  }
+
+
   async remove(id: number, user: UserActiveInterface): Promise<void> {
     const post = await this.postRepository.findOne({ where: { id } });
     if (!post) {
