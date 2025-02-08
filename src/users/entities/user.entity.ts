@@ -1,10 +1,4 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
-import { Comment } from 'src/posts/comments/entities/comment.entity';
-import { UserLike } from 'src/users/users-likes/entities/user-like.entity';
-import { News } from 'src/news/entities/news.entity';
-import { Post } from 'src/posts/entities/post.entity';
-import { UserProgress } from 'src/users/users-progress/entities/user-progress.entity';
-import { UserProject } from 'src/users/users-projects/entities/user-project.entity';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 import { Role } from 'src/common/enums/role.enum';
 
 @Entity()
@@ -36,21 +30,4 @@ export class User {
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   registration_date: Date;
 
-  @OneToMany(() => Comment, (comment) => comment.user, { cascade: true })
-  comments: Comment[];
-
-  @OneToMany(() => Post, (post) => post.user, { cascade: true })
-  posts: Post[];
-
-  @OneToMany(() => UserLike, (like) => like.user, { cascade: true })
-  likes: UserLike[];
-
-  @OneToMany(() => News, (news) => news.author, { cascade: true })
-  news: News[];
-
-  @OneToMany(() => UserProgress, (progress) => progress.user, { cascade: true })
-  progress: UserProgress[];
-
-  @OneToMany(() => UserProject, (project) => project.user, { cascade: true })
-  projects: UserProject[];
 }

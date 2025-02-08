@@ -1,6 +1,5 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { Module } from 'src/courses/modules/entities/module.entity';
-import { UserProgress } from 'src/users/users-progress/entities/user-progress.entity';
 
 export enum courseDifficulty {
   BEGINNER = 'begginer',
@@ -32,7 +31,4 @@ export class Course {
 
   @OneToMany(() => Module, (module) => module.course, { cascade: true })
   modules: Module[];
-
-  @OneToMany(() => UserProgress, (progress) => progress.course, { cascade: true })
-  progress: UserProgress[];
 }
