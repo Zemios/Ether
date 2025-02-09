@@ -28,9 +28,9 @@ export class AuthController {
     @Get('check')
     checkAuth(@Req() req) {
         if (req.user) {
-            return { isAuthenticated: true, user: req.user };
+            return { statusCode: 200, user: req.user };
         }
-        return { isAuthenticated: false };
+        return { statusCode: 401 };
     }
 
     @Get('profile')

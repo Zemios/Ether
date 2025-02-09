@@ -12,6 +12,9 @@ export class AppController {
 
   @Get('/ping')
   ping() {
-    return { message: 'pong' };
+    return {
+      statusCode: 200,
+      message: 'pong'
+    };
   }
 }
