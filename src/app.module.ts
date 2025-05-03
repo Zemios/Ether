@@ -1,15 +1,13 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { UsersModule } from './users/users.module';
-import { CoursesModule } from './courses/courses.module';
-import { LessonsModule } from './courses/modules/lessons/lessons.module';
-import { ModulesModule } from './courses/modules/modules.module';
-import { QuestionsModule } from './courses/modules/lessons/questions/questions.module';
-import { AnswersModule } from './courses/modules/lessons/questions/answers/answers.module';
-import { AuthModule } from './auth/auth.module';
+import { UsersModule } from './interfaces/http/users/users.module';
+import { CoursesModule } from './interfaces/http/learning/courses/courses.module';
+import { LessonsModule } from './interfaces/http/learning/lessons/lessons.module';
+import { ModulesModule } from './interfaces/http/learning/modules/modules.module';
+import { QuestionsModule } from './interfaces/http/learning/questions/questions.module';
+import { AnswersModule } from './interfaces/http/learning/answers/answers.module';
+import { AuthModule } from './interfaces/http/auth/auth.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
@@ -35,7 +33,7 @@ console.log(join(__dirname, '..', 'uploads/profile-pics'));
       useFactory: (configService: ConfigService) => ({
         type: 'mysql',
         host: configService.get<string>('DB_HOST'),
-        port: parseInt(configService.get<string>('DB_PORT')),
+        port: parseInt(configService.get<string>('DB_PORT') || '3306'),
         username: configService.get<string>('DB_USERNAME'),
         password: configService.get<string>('DB_PASSWORD'),
         database: configService.get<string>('DB_DATABASE'),
@@ -52,8 +50,8 @@ console.log(join(__dirname, '..', 'uploads/profile-pics'));
     AnswersModule,
     AuthModule
   ],
-  controllers: [AppController],
-  providers: [AppService, {
+  controllers: [],
+  providers: [{
     provide: APP_GUARD,
     useClass: ThrottlerGuard
   }],
