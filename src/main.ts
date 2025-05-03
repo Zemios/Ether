@@ -9,7 +9,7 @@ async function bootstrap() {
   app.use(cookieParser());
   app.set('trust proxy', 'loopback');
   app.enableCors({
-    origin: [process.env.ORIGIN, 'https://zemios.com'],
+    origin: [process.env.ORIGIN, 'https://zemios.com'].filter(Boolean) as string[],
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     allowedHeaders: 'Content-Type, Accept, Authorization, X-Requested-With',
     credentials: true,
