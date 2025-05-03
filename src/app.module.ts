@@ -27,7 +27,9 @@ console.log(join(__dirname, '..', 'uploads/profile-pics'));
       ttl: 5000,
       limit: 20,
     }]),
-    ConfigModule.forRoot(),
+    ConfigModule.forRoot({
+      envFilePath: process.env.NODE_ENV === 'production' ? '.env' : '.env.local'
+    }),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: (configService: ConfigService) => ({
