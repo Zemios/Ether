@@ -2,7 +2,7 @@
 // comunicarse con la cama de la aplicación
 
 export interface CreateUserDto {
-    id: number;
+    id: string;
     name: string;
     email: string;
     password: string;

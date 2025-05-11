@@ -1,7 +1,7 @@
 import { v4 as uuidv4 } from 'uuid';
 
 export interface PrimitiveUser {
-    id: number;
+    id: string;
     name: string;
     email: string;
     registered_at: Date;
@@ -15,7 +15,7 @@ export class User {
     constructor(private attributes: PrimitiveUser) {}
 
     static create(createUser: {
-        id: number;
+        id: string;
         name: string;
         email: string;
         password: string;

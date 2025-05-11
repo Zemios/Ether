@@ -11,7 +11,7 @@ export class InMemoryUserRepository extends UserRepository {
     }
 
 
-    async getById(id: number): Promise<User | null> {
+    async getById(id: string): Promise<User | null> {
         const user = this.users.find(user => user.id === id);
         return user ? new User(user) : null;
     }

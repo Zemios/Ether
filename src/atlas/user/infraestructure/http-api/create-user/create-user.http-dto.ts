@@ -3,7 +3,7 @@ import { IsUUID, IsString, IsNotEmpty, IsEmail, MinLength, IsOptional } from 'cl
 export class CreateUserHttpDto {
   @IsOptional()
   @IsUUID()
-  id?: number;
+  id?: string;
 
   @IsString()
   @IsNotEmpty()

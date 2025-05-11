@@ -4,7 +4,7 @@ export abstract class UserRepository {
 
     abstract create(user: User): Promise<void>;
 
-    abstract getById(id: number): Promise<User> | null;
+    abstract getById(id: string): Promise<User> | null;
 
 }
 // Creamos clases abstractas con los diferentes métodos a usar
