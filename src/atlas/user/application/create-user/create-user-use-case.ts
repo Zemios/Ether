@@ -1,17 +1,20 @@
-import { CreateUserDTO } from "./create-user.dto";
+import { CreateUserDto } from "./create-user.dto";
 import { PrimitiveUser, User } from "../../domain/user";
 import { UserRepository } from "../../domain/user.repository";
-import { Transaction } from "typeorm";
+import { Injectable } from "@nestjs/common";
 
-export class CreateUser {
-    constructor(private userRepository: UserRepository) {}
+
+@Injectable() // Si ponemos este injectable, sabemos que usamos el framework de NestJS (Por tanto tendríamos cierto acoplamiento al framework)
+export class CreateUserUseCase {
+    constructor(private readonly userRepository: UserRepository) {}
 
     // Garantizamos la transaccionalidad de la operación (o todo o nada)
-    // que se puede hacer
+    // Es lo que se conoce como UNIT OF WORK
+    // En este caso no lo estamos haciendo a través de un gestor de transacciones
     // En el caso de trabajar con un Mongo, Postrgres, Mysql...
     // También podemos realizarlo a través de controladores (middleware - gestor de transacciones?)
     // @Transaction 
-    async execute(dto: CreateUserDTO): Promise<{ user: PrimitiveUser }> {
+    async execute(dto: CreateUserDto): Promise<{ user: PrimitiveUser }> {
 
         const user = User.create(dto);
 
