@@ -12,11 +12,13 @@ import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 import { APP_GUARD } from '@nestjs/core';
+import { UserModule } from './atlas/user/infraestructure/repositories/user.module';
 
 console.log(join(__dirname, '..', 'uploads/profile-pics'));
 
 @Module({
   imports: [
+    UserModule,
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', '..', 'uploads', 'profile-pics'),
       serveRoot: '/profile-pics',

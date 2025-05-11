@@ -1,10 +1,12 @@
 import { CreateUserDto } from "./create-user.dto";
 import { PrimitiveUser, User } from "../../domain/user";
 import { UserRepository } from "../../domain/user.repository";
-import { Injectable } from "@nestjs/common";
+import { Injectable } from "src/atlas/shared/dependency-injection/injectable";
+// import { Injectable } from "@nestjs/common"; // Acoplamiento @nestjs/common
 
 
-@Injectable() // Si ponemos este injectable, sabemos que usamos el framework de NestJS (Por tanto tendríamos cierto acoplamiento al framework)
+// @Injectable() // Si ponemos este injectable, sabemos que usamos el framework de NestJS (Por tanto tendríamos cierto acoplamiento al framework)
+@Injectable()
 export class CreateUserUseCase {
     constructor(private readonly userRepository: UserRepository) {}
 
